@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # If a file or directory exists, serve it directly
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Otherwise, forward the request to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+# Deny access to hidden files (starting with a dot)
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# Cache control for static resources
+<FilesMatch "\.(js|jsx|css|jpg|png|gif|ico|svg)$">
+  Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
