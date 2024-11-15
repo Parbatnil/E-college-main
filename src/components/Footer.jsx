@@ -5,9 +5,11 @@ const Footer = () => {
     <footer className="bg-blue-900 py-10 px-8 rounded-lg shadow-lg">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-12">
         <div className="md:col-span-2">
-          <h2 className="text-xl font-semibold mb-4 text-white">About Us</h2>
+          <h2 className="text-xl font-semibold mb-4 text-yellow-300">
+            About Us
+          </h2>
           <p
-            className="text-base text-gray-200"
+            className="text-base text-yellow-400"
             style={{ textAlign: "justify" }}
           >
             Our online institute is dedicated to providing accessible and
@@ -21,10 +23,10 @@ const Footer = () => {
 
         <div className="md:col-span-3 flex flex-row space-x-6">
           <div className="w-1/2">
-            <h2 className="text-xl font-semibold mb-4 text-white">
+            <h2 className="text-xl font-semibold mb-4 text-yellow-400">
               Quick Links
             </h2>
-            <ul className="text-base text-gray-200 space-y-3">
+            <ul className="text-base texttext-yellow-600 space-y-3">
               <li>Courses</li>
               <li>Help Line</li>
               <li>Reviews</li>

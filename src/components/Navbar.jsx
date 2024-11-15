@@ -139,12 +139,12 @@ const Navbar = () => {
     <div>
       {/* Top Navbar */}
       <nav className="bg-white border-gray-200 dark:bg-[#1E3A8A]">
-        <div className="flex justify-between items-center mx-auto max-w-screen-xl p-4">
+        <div className="flex justify-between items-center mx-auto max-w-screen-xl pt-2">
           <a
             onClick={() => navigate("/")}
             className="flex items-center cursor-pointer space-x-3"
           >
-            <img src={logo} alt="logo" className="h-8" />
+            <img src={logo} alt="logo" className="h-14 w-14" />
             <span className="text-2xl font-semibold text-[#1F2937] dark:text-white">
               E-College
             </span>
@@ -152,7 +152,7 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-6">
             <FaSearch
-              className="cursor-pointer"
+              className="cursor-pointer text-white"
               onClick={() => navigate("/search")}
             />
             <button
