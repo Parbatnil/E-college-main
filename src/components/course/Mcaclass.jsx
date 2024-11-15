@@ -8,17 +8,19 @@ const Mcaclass = () => {
   const [dataas, setDataas] = useState([]);
   const [students, setStudents] = useState([]);
   const [studentname, setStudentname] = useState("");
+  const [roll, setRoll] = useState("");
   const [time, setTime] = useState(new Date());
   const [fixt, setFixt] = useState(time.toLocaleString().slice(0, 10));
-  const [refresh, setRefresh] = useState(false);  // New state for auto-refresh
+  const [refresh, setRefresh] = useState(false); // New state for auto-refresh
 
   useEffect(() => {
-    axios.get('https://courseapi-3kus.onrender.com/api/products?sub=mcaLIVE')
-      .then(res => {
+    axios
+      .get("https://courseapi-3kus.onrender.com/api/products?sub=mcaLIVE")
+      .then((res) => {
         setColumns(Object.keys(res.data.mydata));
         setRecords(res.data.mydata);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
 
     const timer = setInterval(() => {
       setTime(new Date());
@@ -27,32 +29,41 @@ const Mcaclass = () => {
   }, []);
 
   useEffect(() => {
-    const logos = localStorage.getItem('logs');
+    const logos = localStorage.getItem("logs");
     const p = JSON.parse(logos);
 
-    axios.get(`https://courseapi-3kus.onrender.com/api/students/?email=${p}`)
-      .then(res => {
-        setDataas(res.data.students);
-        setStudentname(res.data.students.map((e) => e.name).join(", "));
+    axios
+      .get(`https://courseapi-3kus.onrender.com/api/students/?email=${p}`)
+      .then((res) => {
+        const studentsData = res.data.students;
+        setDataas(studentsData);
+        setStudentname(studentsData.map((e) => e.name).join(", "));
+        const rollNumbers = studentsData.map((e) => e.roll);
+        const parseRoll = JSON.parse(rollNumbers);
+        setRoll(parseRoll);
+
+        // Log roll data directly here
+        // console.log(parseRoll);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(`https://courseapi-3kus.onrender.com/api/atten/?student=${studentname}&date=${fixt}`);
+        const response = await axios.get(
+          `https://courseapi-3kus.onrender.com/api/atten/?roll=${roll}&date=${fixt}`
+        );
         setStudents(response.data.attend);
-        console.log(response.data.attend);
       } catch (error) {
-        console.error('Error fetching students:', error);
+        console.error("Error fetching students:", error);
       }
     };
 
-    if (studentname) {
+    if (roll) {
       fetchStudents();
     }
-  }, [studentname, fixt, refresh]);  // Add `refresh` as a dependency
+  }, [roll, fixt, refresh]); // Add `refresh` as a dependency
 
   const attend = (a, b, c) => {
     const isEmailExist = students.some((student) => student.paper === b);
@@ -61,18 +72,20 @@ const Mcaclass = () => {
       console.log("have");
       window.open(c);
     } else {
-      axios.post('https://courseapi-3kus.onrender.com/api/atten', {
-        "sub": "mca",
-        "teacher": a.slice(2, 7),
-        "paper": b,
-        "date": fixt,
-        "student": studentname
-      })
-        .then(res => {
-          console.log("ok");
-          setRefresh(!refresh);  // Toggle `refresh` to trigger re-render
+      axios
+        .post("https://courseapi-3kus.onrender.com/api/atten", {
+          sub: "mcaLIVE",
+          teacher: a.slice(2, 7),
+          paper: b,
+          date: fixt,
+          student: studentname,
+          roll: roll,
         })
-        .catch(err => console.log(err));
+        .then((res) => {
+          console.log("ok");
+          setRefresh(!refresh); // Toggle `refresh` to trigger re-render
+        })
+        .catch((err) => console.log(err));
       window.open(c);
     }
   };
@@ -84,10 +97,10 @@ const Mcaclass = () => {
         <h1 className="text-xl text-black">Live Class(MCA)</h1>
       </div>
 
-      <div className=' flex justify-center items-center px-0 sm:px-3'>
-        <div className=' container mt-2 mx-3 mb-4' >
-          <div className=' overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center'>
-            <div className=' container pb-8 sm:pb-0 mt-6'>
+      <div className=" flex justify-center items-center px-0 sm:px-3">
+        <div className=" container mt-2 mx-3 mb-4">
+          <div className=" overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center">
+            <div className=" container pb-8 sm:pb-0 mt-6">
               <div className=" flex  flex-col sm:flex-row md:flex-col items-center sm:items-center sm:justify-center sm:gap-10 w-full text-black  ">
                 <h1 className=" text-xl">{`Time ${time.toLocaleString()}`}</h1>
                 <div className=" flex justify-center">
@@ -104,19 +117,29 @@ const Mcaclass = () => {
                       <tbody>
                         {records.map((d, i) => (
                           <tr key={i}>
-                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">{d.name}</td>
-                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">{d.subtitle}</td>
-                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">{d.teacher}</td>
-                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-red-500 cursor-pointer" onClick={() => {
-                              attend(d.teacher, d.subtitle, d.link)
-                            }}>live{d.time}</td>
+                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                              {d.name}
+                            </td>
+                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                              {d.subtitle}
+                            </td>
+                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                              {d.teacher}
+                            </td>
+                            <td
+                              className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-red-500 cursor-pointer"
+                              onClick={() => {
+                                attend(d.teacher, d.subtitle, d.link);
+                              }}
+                            >
+                              live{d.time}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -124,6 +147,6 @@ const Mcaclass = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Mcaclass;

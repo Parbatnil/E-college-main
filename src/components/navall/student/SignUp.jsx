@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import HashLoader from "react-spinners/HashLoader";
+
 const SignUp = ({ onSignUp }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [students, setStudents] = useState([]);
   const [guardian, setGuardian] = useState("");
+  const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -22,48 +25,51 @@ const SignUp = ({ onSignUp }) => {
         console.error("Error fetching students:", error);
       }
     };
-
     fetchStudents();
   }, []);
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     setLoading(true);
-    const isEmailExist = students.some((student) => student.email === email);
+    setErrorMessage("");
 
+    const isEmailExist = students.some((student) => student.email === email);
     if (isEmailExist) {
-      alert("Email already exists");
+      setErrorMessage("Email already exists");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      await axios.post(
+        "https://courseapi-3kus.onrender.com/api/register-student",
+        {
+          name,
+          email,
+          password,
+          guardian,
+          phonenumber: phone,
+        }
+      );
+      alert("Registered successfully!");
       navigate("/");
-    } else {
-      try {
-        await axios.post(
-          "https://courseapi-3kus.onrender.com/api/register-student",
-          {
-            name,
-            email,
-            password,
-            guardian: guardian,
-            phonenumber: phone,
-          }
-        );
-        alert("Registered successfully!");
-        navigate("/");
-      } catch (error) {
-        console.error("Error registering student:", error);
-        alert("Error registering");
-      } finally {
-        setLoading(false);
-      }
+    } catch (error) {
+      console.error("Error registering student:", error);
+      setErrorMessage("Error registering. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
+    <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-indigo-700">
+          Sign Up
+        </h2>
 
         {loading ? (
-          <div className=" flex justify-center items-center mt-10">
+          <div className="flex justify-center items-center mt-10">
             <HashLoader
               loading={loading}
               size={50}
@@ -73,6 +79,9 @@ const SignUp = ({ onSignUp }) => {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
+            {errorMessage && (
+              <p className="text-red-500 text-sm text-center">{errorMessage}</p>
+            )}
             <div>
               <label
                 htmlFor="name"
@@ -120,6 +129,9 @@ const SignUp = ({ onSignUp }) => {
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
+              <p className="text-xs text-gray-500 mt-1">
+                Must be at least 8 characters long.
+              </p>
             </div>
             <div>
               <label
