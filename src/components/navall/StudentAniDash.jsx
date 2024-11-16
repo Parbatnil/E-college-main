@@ -177,7 +177,7 @@ const StudentAniDash = () => {
         </div>
       </div>
       <Routes>
-        <Route path="/" element={<StudentProfile student={student} />} />
+        {/* <Route path="/" element={<StudentProfile student={student} />} /> */}
         <Route path="/atten" element={<Atten />} />
         <Route path="/mycourse" element={<Courses student={student} />} />
       </Routes>
