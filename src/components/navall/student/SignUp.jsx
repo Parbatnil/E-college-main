@@ -28,14 +28,27 @@ const SignUp = ({ onSignUp }) => {
     fetchStudents();
   }, []);
 
+  const validateForm = () => {
+    if (!name.trim()) return "Name is required.";
+    if (!email.trim()) return "Email is required.";
+    const isEmailExist = students.some((student) => student.email === email);
+    if (isEmailExist) return "Email already exists.";
+    if (password.length < 8)
+      return "Password must be at least 8 characters long.";
+    const phoneRegex = /^\d{10}$/;
+    if (!phone.match(phoneRegex)) return "Phone number must be 10 digits.";
+    if (!guardian.trim()) return "Guardian name is required.";
+    return ""; // No error
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setErrorMessage("");
 
-    const isEmailExist = students.some((student) => student.email === email);
-    if (isEmailExist) {
-      setErrorMessage("Email already exists");
+    const error = validateForm();
+    if (error) {
+      setErrorMessage(error); // Show error message
       setLoading(false);
       return;
     }
@@ -82,92 +95,139 @@ const SignUp = ({ onSignUp }) => {
             {errorMessage && (
               <p className="text-red-500 text-sm text-center">{errorMessage}</p>
             )}
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
+            <div className="flex items-center border-b-2 border-gray-300 py-2">
+              <svg
+                className="h-5 w-5 text-gray-500 mr-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                Name
-              </label>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 12h14M5 12l5 5m-5-5l5-5"
+                />
+              </svg>
               <input
                 type="text"
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Full Name"
               />
             </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+
+            <div className="flex items-center border-b-2 border-gray-300 py-2">
+              <svg
+                className="h-5 w-5 text-gray-500 mr-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                Email
-              </label>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M16 8c0 4-4 8-4 8s-4-4-4-8a4 4 0 118 0z"
+                />
+              </svg>
               <input
                 type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Email Address"
               />
             </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+
+            <div className="flex items-center border-b-2 border-gray-300 py-2">
+              <svg
+                className="h-5 w-5 text-gray-500 mr-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                Password
-              </label>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 11c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM12 13c-3.31 0-6 1.69-6 3v2h12v-2c0-1.31-2.69-3-6-3z"
+                />
+              </svg>
               <input
                 type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Password"
               />
-              <p className="text-xs text-gray-500 mt-1">
-                Must be at least 8 characters long.
-              </p>
             </div>
-            <div>
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
+
+            <div className="flex items-center border-b-2 border-gray-300 py-2">
+              <svg
+                className="h-5 w-5 text-gray-500 mr-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                Phone Number
-              </label>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M8 12h16m-8 0l-4 4m4-4l4-4"
+                />
+              </svg>
               <input
                 type="tel"
                 id="phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Phone Number"
               />
             </div>
-            <div>
-              <label
-                htmlFor="guardian"
-                className="block text-sm font-medium text-gray-700"
+
+            <div className="flex items-center border-b-2 border-gray-300 py-2">
+              <svg
+                className="h-5 w-5 text-gray-500 mr-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                Guardian
-              </label>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M18 5c0 1.5-1.5 3-3 3-1.5 0-3-1.5-3-3s1.5-3 3-3c1.5 0 3 1.5 3 3zm-5 1.5c-2.5 0-5 1.5-5 4.5v6h10v-6c0-3-2.5-4.5-5-4.5z"
+                />
+              </svg>
               <input
                 type="text"
                 id="guardian"
                 value={guardian}
                 onChange={(e) => setGuardian(e.target.value)}
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Guardian Name"
               />
             </div>
+
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-4"
             >
               Sign Up
             </button>

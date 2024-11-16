@@ -3,6 +3,7 @@ import EditTeacherForm from "./EditTeacherForm"; // Import the new component
 import Navbar from "../../Navbar";
 import HashLoader from "react-spinners/HashLoader";
 import AdminNav from "../../AdminNav";
+
 const TeachersDataPage = () => {
   const [teachers, setTeachers] = useState([]);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
@@ -74,11 +75,11 @@ const TeachersDataPage = () => {
   return (
     <div className="">
       <AdminNav />
-      <div className="p-8 bg-gray-800 min-h-screen text-white">
+      <div className="p-8 bg-white min-h-screen text-black">
         <h1 className="text-2xl font-bold mb-4">Teachers Data</h1>
 
         {loading ? (
-          <div className=" flex justify-center items-center mt-10">
+          <div className="flex justify-center items-center mt-10">
             <HashLoader
               loading={loading}
               size={50}
@@ -98,9 +99,9 @@ const TeachersDataPage = () => {
           </div>
         ) : (
           <div className="flex overflow-auto">
-            <table className="min-w-full bg-gray-700 border border-gray-600 rounded-lg overflow-hidden ">
+            <table className="min-w-full bg-gray-200 border border-gray-300 rounded-lg overflow-hidden">
               <thead>
-                <tr className="bg-gray-600">
+                <tr className="bg-gray-300">
                   <th className="py-2 px-4 border-b border-gray-500">
                     Register Number
                   </th>
@@ -129,7 +130,7 @@ const TeachersDataPage = () => {
                   return (
                     <tr
                       key={teacher.registerNumber}
-                      className="hover:bg-gray-600"
+                      className="hover:bg-gray-300"
                     >
                       <td className="py-2 px-4 border-b border-gray-500">
                         {teacher.registerNumber}

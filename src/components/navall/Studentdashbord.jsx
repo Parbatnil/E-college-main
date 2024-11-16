@@ -57,16 +57,16 @@ const Studentdashbord = () => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex flex-col min-h-screen">
         {/* Sidebar */}
         {/* <StudentNav student={student} /> */}
 
         {/* Content Area */}
-        <div className="flex-1 p-4 overflow-auto">
+        <div className="flex-1 p-4 overflow-y-auto">
           <Routes>
-            <Route path="/" element={<StudentProfile student={student} />} />
+            {/* <Route path="/" element={<StudentProfile student={student} />} /> */}
             <Route path="/atten" element={<Atten />} />
-            <Route path="/mycourse" element={<Courses student={student} />} />
+            {/* <Route path="/mycourse" element={<Courses student={student} />} /> */}
           </Routes>
         </div>
       </div>

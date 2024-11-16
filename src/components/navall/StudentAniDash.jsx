@@ -139,16 +139,16 @@ const StudentAniDash = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}
                 className="bg-white text-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
+                onClick={() => navigate("/studentdashbord/atten")}
               >
                 <div className="flex items-center justify-center mb-4">
                   <div className="w-12 h-12 bg-indigo-500 text-white rounded-full flex items-center justify-center">
                     <FaArrowRight size={24} />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Expert Tutors</h3>
+                <h3 className="text-xl font-semibold mb-3">My Attendence</h3>
                 <p className="text-gray-600">
-                  Learn from industry experts who are passionate about sharing
-                  their knowledge.
+                  Student Attence for there classes
                 </p>
               </motion.div>
 
@@ -158,6 +158,7 @@ const StudentAniDash = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}
                 className="bg-white text-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
+                onClick={() => navigate("/studentdashbord/my-marks")} // Adding a navigation link
               >
                 <div className="flex items-center justify-center mb-4">
                   <div className="w-12 h-12 bg-indigo-500 text-white rounded-full flex items-center justify-center">
@@ -179,7 +180,7 @@ const StudentAniDash = () => {
       <Routes>
         {/* <Route path="/" element={<StudentProfile student={student} />} /> */}
         <Route path="/atten" element={<Atten />} />
-        <Route path="/mycourse" element={<Courses student={student} />} />
+        <Route path="/my-course" element={<Courses student={student} />} />
       </Routes>
     </>
   );

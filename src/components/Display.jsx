@@ -40,6 +40,8 @@ import Atten from "./navall/Atten";
 import Courses from "./navall/Courses";
 import Error404 from "./Error404";
 import StudentAniDash from "./navall/StudentAniDash";
+import StudentsData from "./navall/admin/StudentsData";
+import Addstudent from "./navall/admin/Addstudent";
 const Display = () => {
   return (
     <div>
@@ -53,6 +55,7 @@ const Display = () => {
         <Route path="/studentdashbord/*" element={<StudentAniDash />} />
 
         <Route path="/studentdashbord/profile" element={<StudentProfile />} />
+        <Route path="/studentdashbord/atten" element={<Atten />} />
 
         <Route path="/bca" element={<Bca />} />
         <Route path="/mca" element={<Mca />} />
@@ -77,6 +80,8 @@ const Display = () => {
           path="/dashboard/:registerNumber"
           element={<TeacherDashboard />}
         />
+        <Route path="/student-data" element={<StudentsData />} />
+
         <Route path="/teachers-data" element={<TeachersDataPage />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/teacher-register" element={<TeacherRegister />} />
@@ -86,6 +91,8 @@ const Display = () => {
         <Route path="/mark" element={<Mark />} />
         <Route path="/managementcontacts" element={<Managementcontacts />} />
         <Route path="*" element={<Error404 />} />
+
+        <Route path="/student-register" element={<Addstudent />} />
         {/* <Route path="/studentdashbord/*" element={<Studentdashbord />} /> */}
       </Routes>
     </div>
