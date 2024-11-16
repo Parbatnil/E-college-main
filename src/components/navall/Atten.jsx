@@ -1,58 +1,139 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
+
 const Atten = () => {
-  const subjects = [
-    { subject: "Mathematics", attendance: "Present" },
-    { subject: "Computer Science", attendance: "Absent" },
-    { subject: "Physics", attendance: "Present" },
-    { subject: "Chemistry", attendance: "Present" },
-    { subject: "English", attendance: "Absent" },
-  ];
+  const [students, setStudents] = useState(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const logp = localStorage.getItem("studentid");
+        const p = JSON.parse(logp);
+        const response = await axios.get(
+          `https://courseapi-3kus.onrender.com/api/atten/?roll=${p}`
+        );
+        setStudents(response.data.attend);
+      } catch (error) {
+        setError("Error fetching students.");
+        console.error("Error fetching students:", error);
+      }
+    };
+
+    fetchStudents();
+  }, []);
+
+  if (error) {
+    return <div className="text-red-500 text-center mt-10">{error}</div>;
+  }
+
+  const attendanceSummary = students
+    ? students.reduce((acc, student) => {
+        if (!acc[student.paper]) {
+          acc[student.paper] = 1;
+        } else {
+          acc[student.paper]++;
+        }
+        return acc;
+      }, {})
+    : {};
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <motion.div
-        className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="text-3xl font-bold mb-4 text-center text-blue-600">
-          Your Subject Attendance
-        </h1>
+    <div className="p-6">
+      <h2 className="text-2xl md:text-3xl font-semibold text-center mb-8">
+        Student Attendance
+      </h2>
+      {students ? (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="overflow-x-auto"
+          >
+            <table className="min-w-full table-auto border-collapse border border-gray-300">
+              <thead className="bg-indigo-600 text-white">
+                <tr>
+                  <th className="px-4 py-2 text-left">Teacher Name</th>
+                  <th className="px-4 py-2 text-left">Roll</th>
+                  <th className="px-4 py-2 text-left">Paper Name</th>
+                  <th className="px-4 py-2 text-left">Total Attendance</th>
+                  <th className="px-4 py-2 text-left">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {students.map((student, index) => (
+                  <motion.tr
+                    key={`${student.paper}-${student.date}-${index}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8 }}
+                    className="hover:bg-gray-100 transition-all duration-300"
+                  >
+                    <td className="px-4 py-2 text-sm md:text-base">
+                      {student.teacher}
+                    </td>
+                    <td className="px-4 py-2 text-sm md:text-base">
+                      {student.roll}
+                    </td>
+                    <td className="px-4 py-2 text-sm md:text-base">
+                      {student.paper}
+                    </td>
+                    <td className="px-4 py-2 text-sm md:text-base">
+                      {
+                        students.filter((st) => st.paper === student.paper)
+                          .length
+                      }
+                    </td>
+                    <td className="px-4 py-2 text-sm md:text-base">
+                      {student.date}
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </motion.div>
 
-        <motion.div
-          className="space-y-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          {subjects.map((subject, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-              className={`p-4 rounded-lg shadow-md ${
-                subject.attendance === "Present" ? "bg-green-100" : "bg-red-100"
-              }`}
-            >
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold">{subject.subject}</h2>
-                <span
-                  className={`px-4 py-1 rounded-full ${
-                    subject.attendance === "Present"
-                      ? "bg-green-500 text-white"
-                      : "bg-red-500 text-white"
-                  }`}
-                >
-                  {subject.attendance}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
+          {/* New Responsive Attendance Summary Table */}
+          <div className="mt-8">
+            <h3 className="text-2xl md:text-3xl font-semibold text-center mb-4">
+              Attendance Summary
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+                <thead className="bg-gray-800 text-white">
+                  <tr>
+                    <th className="px-4 py-2 md:px-6 md:py-3 text-left font-semibold text-sm md:text-lg">
+                      Paper Name
+                    </th>
+                    <th className="px-4 py-2 md:px-6 md:py-3 text-left font-semibold text-sm md:text-lg">
+                      Total Attendance
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(attendanceSummary).map(([subject, count]) => (
+                    <tr
+                      key={subject}
+                      className="border-b border-gray-200 hover:bg-gray-100 transition-all duration-300"
+                    >
+                      <td className="px-4 py-2 md:px-6 py-3 text-gray-700 text-sm md:text-base">
+                        {subject}
+                      </td>
+                      <td className="px-4 py-2 md:px-6 py-3 text-gray-700 text-sm md:text-base">
+                        {count}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="text-center text-xl text-gray-500">Loading...</div>
+      )}
     </div>
   );
 };

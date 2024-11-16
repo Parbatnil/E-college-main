@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
-import { motion } from "framer-motion"; // Import framer-motion
+import { motion } from "framer-motion";
 import backgroundImg from "../../assets/white.jpg";
 import axios from "axios";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -40,6 +40,16 @@ const StudentAniDash = () => {
       }, 2000);
     }
   }, []);
+
+  // Avoid accessing `roll` until `student` is available
+  useEffect(() => {
+    if (student?.roll) {
+      localStorage.setItem("studentid", JSON.stringify(student.roll));
+      const logp = localStorage.getItem("studentid");
+      const p = JSON.parse(logp);
+      console.log(p);
+    }
+  }, [student]); // Only run when `student` changes
 
   if (loading) {
     return (
@@ -180,7 +190,7 @@ const StudentAniDash = () => {
       <Routes>
         {/* <Route path="/" element={<StudentProfile student={student} />} /> */}
         <Route path="/atten" element={<Atten />} />
-        <Route path="/my-course" element={<Courses student={student} />} />
+        <Route path="/mycourse" element={<Courses student={student} />} />
       </Routes>
     </>
   );

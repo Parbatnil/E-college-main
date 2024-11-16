@@ -1,39 +1,34 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "../Navbar";
 
 const Mcaclass = () => {
   const [columns, setColumns] = useState([]);
   const [records, setRecords] = useState([]);
+
+  const [dataas, setDataas] = useState([]);
   const [students, setStudents] = useState([]);
   const [studentname, setStudentname] = useState("");
   const [roll, setRoll] = useState("");
   const [time, setTime] = useState(new Date());
-  const [fixt, setFixt] = useState(time.toLocaleString().slice(0, 10)); // Today's date in 'MM/DD/YY' format
+  const [fixt, setFixt] = useState(time.toLocaleString().slice(0, 10));
   const [refresh, setRefresh] = useState(false); // New state for auto-refresh
 
-  // Fetch live class records and filter by today's date
   useEffect(() => {
     axios
       .get("https://courseapi-3kus.onrender.com/api/products?sub=mcaLIVE")
       .then((res) => {
-        // Filter records to match today's date
-        const filteredRecords = res.data.mydata.filter(
-          (record) => record.date === fixt
-        );
         setColumns(Object.keys(res.data.mydata));
-        setRecords(filteredRecords);
+        setRecords(res.data.mydata);
       })
       .catch((err) => console.log(err));
 
     const timer = setInterval(() => {
       setTime(new Date());
     }, 1000);
-
     return () => clearInterval(timer);
-  }, [fixt]); // Run the effect again when `fixt` changes
+  }, []);
 
-  // Fetch student data
   useEffect(() => {
     const logos = localStorage.getItem("logs");
     const p = JSON.parse(logos);
@@ -42,14 +37,18 @@ const Mcaclass = () => {
       .get(`https://courseapi-3kus.onrender.com/api/students/?email=${p}`)
       .then((res) => {
         const studentsData = res.data.students;
+        setDataas(studentsData);
         setStudentname(studentsData.map((e) => e.name).join(", "));
         const rollNumbers = studentsData.map((e) => e.roll);
-        setRoll(rollNumbers);
+        const parseRoll = JSON.parse(rollNumbers);
+        setRoll(parseRoll);
+
+        // Log roll data directly here
+        // console.log(parseRoll);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  // Fetch attendance data for students
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -65,26 +64,29 @@ const Mcaclass = () => {
     if (roll) {
       fetchStudents();
     }
-  }, [roll, fixt, refresh]); // Add `refresh` as a dependency
+  }, [roll, fixt, refresh]); // Add refresh as a dependency
 
-  // Handle attendance submission
   const attend = (a, b, c) => {
     const isEmailExist = students.some((student) => student.paper === b);
 
+    let ab = JSON.parse(a);
+
     if (isEmailExist) {
+      console.log("have");
       window.open(c);
     } else {
       axios
         .post("https://courseapi-3kus.onrender.com/api/atten", {
           sub: "mcaLIVE",
-          teacher: a.slice(2, 7),
+          teacher: a,
           paper: b,
           date: fixt,
           student: studentname,
           roll: roll,
         })
         .then((res) => {
-          setRefresh(!refresh); // Toggle `refresh` to trigger re-render
+          console.log("ok");
+          setRefresh(!refresh); // Toggle refresh to trigger re-render
         })
         .catch((err) => console.log(err));
       window.open(c);
@@ -94,24 +96,24 @@ const Mcaclass = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex justify-center items-center p-4">
+      <div className=" flex justify-center items-center p-4 ">
         <h1 className="text-xl text-black">Live Class(MCA)</h1>
       </div>
 
-      <div className="flex justify-center items-center px-0 sm:px-3">
-        <div className="container mt-2 mx-3 mb-4">
-          <div className="overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center">
-            <div className="container pb-8 sm:pb-0 mt-6">
-              <div className="flex flex-col sm:flex-row md:flex-col items-center sm:items-center sm:justify-center sm:gap-10 w-full text-black">
-                <h1 className="text-xl">{`Time ${time.toLocaleString()}`}</h1>
-                <div className="flex justify-center">
-                  <div className="container mt-2">
-                    <table className="table">
+      <div className=" flex justify-center items-center px-0 sm:px-3">
+        <div className=" container mt-2 mx-3 mb-4">
+          <div className=" overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center">
+            <div className=" container pb-8 sm:pb-0 mt-6">
+              <div className=" flex  flex-col sm:flex-row md:flex-col items-center sm:items-center sm:justify-center sm:gap-10 w-full text-black  ">
+                <h1 className=" text-xl">{`Time ${time.toLocaleString()}`}</h1>
+                <div className=" flex justify-center">
+                  <div className=" container mt-2">
+                    <table className=" table">
                       <thead>
                         <tr>
                           <th>Topic</th>
                           <th>Name</th>
-                          <th>Teacher</th>
+                          <th>teacher</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -129,11 +131,11 @@ const Mcaclass = () => {
                             </td>
                             <td
                               className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-red-500 cursor-pointer"
-                              onClick={() =>
-                                attend(d.teacher, d.subtitle, d.link)
-                              }
+                              onClick={() => {
+                                attend(d.teacher, d.subtitle, d.link);
+                              }}
                             >
-                              live {d.time}
+                              live{d.time}
                             </td>
                           </tr>
                         ))}
