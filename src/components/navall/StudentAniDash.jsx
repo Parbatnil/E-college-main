@@ -126,11 +126,10 @@ const StudentAniDash = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-3">
-                  Interactive Lessons
+                  Student Dashboard
                 </h3>
                 <p className="text-gray-600">
-                  Engage with fun, interactive lessons and quizzes tailored to
-                  your learning pace.
+                  Open Your Student DashBoard to check your Details
                 </p>
               </motion.div>
 
