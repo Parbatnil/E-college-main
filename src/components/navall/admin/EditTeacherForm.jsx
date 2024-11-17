@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-const streamOptions = ['MBA', 'MCA', 'BTech', 'BArch', 'BA', 'MTech'];
+const streamOptions = ["MBA", "MCA", "BTech", "BArch", "BA", "MTech"];
 
 const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
   const [formData, setFormData] = useState({
@@ -10,9 +10,9 @@ const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
     streams: teacher.streams,
     subjects: teacher.subjects,
   });
-  
+
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setFormData({
@@ -49,27 +49,33 @@ const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
   const handleSubjectChange = (index, e) => {
     const newSubjects = [...formData.subjects];
     newSubjects[index] = e.target.value;
-    updateFormData('subjects', newSubjects);
+    updateFormData("subjects", newSubjects);
   };
 
   const handleAddSubject = () => {
-    updateFormData('subjects', [...formData.subjects, '']);
+    updateFormData("subjects", [...formData.subjects, ""]);
   };
 
   const handleRemoveSubject = (index) => {
-    updateFormData('subjects', formData.subjects.filter((_, i) => i !== index));
+    updateFormData(
+      "subjects",
+      formData.subjects.filter((_, i) => i !== index)
+    );
   };
 
   const updateTeacher = async (updatedData) => {
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const response = await fetch(`https://courseapi-3kus.onrender.com/api/teacher/${teacher.registerNumber}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedData),
-      });
+      const response = await fetch(
+        `https://courseapi-3kus.onrender.com/api/teacher/${teacher.registerNumber}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedData),
+        }
+      );
 
       const data = await response.json();
 
@@ -77,11 +83,11 @@ const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
         onUpdate({ ...updatedData, registerNumber: teacher.registerNumber });
         alert("Teacher updated successfully!");
       } else {
-        setError(data.message || 'Failed to update teacher.');
+        setError(data.message || "Failed to update teacher.");
       }
     } catch (error) {
-      console.error('Error updating teacher:', error);
-      setError('Server error, please try again later.');
+      console.error("Error updating teacher:", error);
+      setError("Server error, please try again later.");
     } finally {
       setLoading(false);
     }
@@ -96,10 +102,16 @@ const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md space-y-4">
         <h2 className="text-xl font-bold text-gray-800">Edit Teacher</h2>
-        {error && <div className="bg-red-100 text-red-700 p-2 rounded-md text-sm">{error}</div>}
+        {error && (
+          <div className="bg-red-100 text-red-700 p-2 rounded-md text-sm">
+            {error}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium text-sm mb-1">Teacher Name</label>
+            <label className="text-gray-700 font-medium text-sm mb-1">
+              Teacher Name
+            </label>
             <input
               type="text"
               name="name"
@@ -110,7 +122,9 @@ const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium text-sm mb-1">Date of Joining</label>
+            <label className="text-gray-700 font-medium text-sm mb-1">
+              Date of Joining
+            </label>
             <input
               type="date"
               name="joiningDate"
@@ -121,7 +135,9 @@ const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium text-sm mb-1">Date of Birth</label>
+            <label className="text-gray-700 font-medium text-sm mb-1">
+              Date of Birth
+            </label>
             <input
               type="date"
               name="birthDate"
@@ -132,7 +148,9 @@ const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium text-sm mb-1">Streams</label>
+            <label className="text-gray-700 font-medium text-sm mb-1">
+              Streams
+            </label>
             <div className="grid grid-cols-2 gap-2">
               {streamOptions.map((stream) => (
                 <div key={stream} className="flex items-center">
@@ -144,13 +162,17 @@ const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
                     onChange={handleStreamChange}
                     className="mr-2 text-sm"
                   />
-                  <label htmlFor={stream} className="text-gray-600 text-sm">{stream}</label>
+                  <label htmlFor={stream} className="text-gray-600 text-sm">
+                    {stream}
+                  </label>
                 </div>
               ))}
             </div>
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-700 font-medium text-sm mb-1">Subjects</label>
+            <label className="text-gray-700 font-medium text-sm mb-1">
+              Subjects
+            </label>
             {formData.subjects.map((subject, index) => (
               <div key={index} className="flex items-center space-x-2 mb-1">
                 <input
@@ -189,10 +211,12 @@ const EditTeacherForm = ({ teacher, onClose, onUpdate }) => {
             </button>
             <button
               type="submit"
-              className={"bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none text-sm ${loading ? 'opacity-50 cursor-not-allowed' : ''}"}
+              className={
+                "bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none text-sm ${loading ? 'opacity-50 cursor-not-allowed' : ''}"
+              }
               disabled={loading}
             >
-              {loading ? 'Updating...' : 'Update'}
+              {loading ? "Updating..." : "Update"}
             </button>
           </div>
         </form>

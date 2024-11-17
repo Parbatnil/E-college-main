@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
+import Navbar from "../../components/Navbar";
 import axios from "axios";
-import Navbar from "../Navbar";
 
 const Mcaclass = () => {
   const [columns, setColumns] = useState([]);
   const [records, setRecords] = useState([]);
 
+  const [date, setDate] = useState("");
   const [dataas, setDataas] = useState([]);
   const [students, setStudents] = useState([]);
   const [studentname, setStudentname] = useState("");
@@ -15,6 +16,10 @@ const Mcaclass = () => {
   const [refresh, setRefresh] = useState(false); // New state for auto-refresh
 
   useEffect(() => {
+    const todayDate =
+      new Date().toLocaleDateString("en-US").slice(0, 8) +
+      new Date().getFullYear().toString().slice(-2);
+    setDate(todayDate);
     axios
       .get("https://courseapi-3kus.onrender.com/api/products?sub=mcaLIVE")
       .then((res) => {
@@ -69,8 +74,6 @@ const Mcaclass = () => {
   const attend = (a, b, c) => {
     const isEmailExist = students.some((student) => student.paper === b);
 
-    let ab = JSON.parse(a);
-
     if (isEmailExist) {
       console.log("have");
       window.open(c);
@@ -78,7 +81,7 @@ const Mcaclass = () => {
       axios
         .post("https://courseapi-3kus.onrender.com/api/atten", {
           sub: "mcaLIVE",
-          teacher: a,
+          teacher: a.slice(2, 7),
           paper: b,
           date: fixt,
           student: studentname,
@@ -118,27 +121,29 @@ const Mcaclass = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {records.map((d, i) => (
-                          <tr key={i}>
-                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
-                              {d.name}
-                            </td>
-                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
-                              {d.subtitle}
-                            </td>
-                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
-                              {d.teacher}
-                            </td>
-                            <td
-                              className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-red-500 cursor-pointer"
-                              onClick={() => {
-                                attend(d.teacher, d.subtitle, d.link);
-                              }}
-                            >
-                              live{d.time}
-                            </td>
-                          </tr>
-                        ))}
+                        {records
+                          .filter((e) => e.date === date)
+                          .map((d, i) => (
+                            <tr key={i}>
+                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                                {d.name}
+                              </td>
+                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                                {d.subtitle}
+                              </td>
+                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                                {d.teacher}
+                              </td>
+                              <td
+                                className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-red-500 cursor-pointer"
+                                onClick={() => {
+                                  attend(d.teacher, d.subtitle, d.link);
+                                }}
+                              >
+                                live{d.time}
+                              </td>
+                            </tr>
+                          ))}
                       </tbody>
                     </table>
                   </div>

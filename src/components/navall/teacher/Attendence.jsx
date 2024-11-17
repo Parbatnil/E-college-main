@@ -10,6 +10,7 @@ const Attendance = () => {
   const [dates, setDates] = useState(new Date().toLocaleString().slice(0, 10));
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [showNotification, setShowNotification] = useState(false); // Notification state
 
   useEffect(() => {
     const tname = localStorage.getItem("teachername").slice(2, 7);
@@ -36,9 +37,10 @@ const Attendance = () => {
     axios
       .delete(`https://courseapi-3kus.onrender.com/api/atten/${_id}`)
       .then((res) => {
-        alert("Attendance deleted successfully");
         setData((prevData) => prevData.filter((row) => row._id !== _id));
         setShowModal(false); // Close modal after deletion
+        setShowNotification(true); // Show success notification
+        setTimeout(() => setShowNotification(false), 3000); // Hide notification after 3 seconds
       })
       .catch((err) => console.log(err));
   };
@@ -149,6 +151,14 @@ const Attendance = () => {
           </Dialog.Panel>
         </div>
       </Dialog>
+
+      {/* Success Notification */}
+      {showNotification && (
+        <div className="fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+          <p className="font-semibold">Attendance Deleted</p>
+          <p>Record deleted successfully!</p>
+        </div>
+      )}
     </>
   );
 };

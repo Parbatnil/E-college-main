@@ -129,7 +129,8 @@ const TeacherNav = () => {
       </nav>
 
       {/* Mobile Menu */}
-      <div className="rounded-lg max-h-12 lg:hidden bg-blue-900 text-white">
+      {/* Mobile Menu */}
+      <div className="rounded-lg max-h-12 lg:hidden bg-blue-900 text-white fixed w-full z-50 top-0">
         <div className="flex items-center justify-between">
           <button
             className="focus:outline-none lg:hidden"
@@ -167,7 +168,7 @@ const TeacherNav = () => {
           </div>
         </div>
         {isMobileMenuOpen && (
-          <ul className="mx-2 z-1000 p-2 mt-2 flex flex-col gap-4 text-gray-300 bg-blue-900 py-5 rounded-md">
+          <ul className="mx-2 z-50 p-2 mt-2 flex flex-col gap-4 text-gray-300 bg-blue-900 py-5 rounded-md">
             <li
               className="hover:text-white cursor-pointer"
               onClick={() => navigate("/")}
