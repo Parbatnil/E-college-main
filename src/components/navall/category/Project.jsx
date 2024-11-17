@@ -1,47 +1,55 @@
 import React from "react";
 import { PROJECTS } from "../../../assets/Assets";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Project = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="pt-10 mx-3" id="project">
-      <h2 className="mb-8 text-center text-3xl lg:text-4xl">Popular Course</h2>
-      <div className="flex items-center justify-center px-0 sm:px-7">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <section className="pt-10 px-3 md:px-10" id="project">
+      <h2 className="mb-12 text-center text-4xl lg:text-5xl font-bold text-blue-900">
+        Popular Courses
+      </h2>
+      <div className="flex items-center justify-center">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.filter((project) => {
             if (project.title.toLowerCase().includes("a".toLowerCase())) {
               return project;
             }
           }).map((project) => (
-            <div
+            <motion.div
               key={project.id}
-              className="bg-blue-900 flex flex-col items-center w-full max-w-md mx-auto p-5 rounded-3xl gap-y-4 transition-transform duration-500 hover:scale-105"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.05, rotate: -1 }}
+              transition={{ duration: 0.3 }}
+              className="bg-gradient-to-br from-blue-900 to-blue-700 flex flex-col items-center w-full max-w-md mx-auto p-6 rounded-3xl gap-y-6 shadow-lg transform transition-transform"
             >
               <div className="w-full">
                 <img
                   src={project.image}
                   alt={project.name}
-                  className="w-full h-48 object-cover rounded-xl"
+                  className="w-full h-56 object-cover rounded-2xl shadow-md transition-transform duration-300 transform hover:scale-105"
                 />
               </div>
-              <span className="bg-yellow-300 text-center text-blue-800 font-semibold rounded-xl px-4 py-1">
+              <span className="bg-yellow-300 text-center text-blue-800 font-semibold rounded-full px-6 py-2">
                 {`Unlock Your Future with ${project.name}`}
               </span>
-              <h3 className="text-2xl text-white font-extrabold text-center">
+              <h3 className="text-2xl text-white font-extrabold text-center leading-tight">
                 {project.name}
               </h3>
-              <p className="text-yellow-200 text-center">
+              <p className="text-yellow-100 text-center px-4">
                 {project.description}
               </p>
-              <button
+              <motion.button
                 onClick={() => navigate(project.Link)}
-                className="bg-white text-blue-900 py-3 px-6 rounded-xl text-lg font-medium mb-5 sm:text-base hover:bg-gray-300 transition"
+                whileHover={{ scale: 1.1 }}
+                className="bg-white text-blue-900 py-3 px-8 rounded-full text-lg font-semibold shadow-md hover:bg-yellow-100 transition-colors"
               >
                 View Course
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           ))}
         </div>
       </div>

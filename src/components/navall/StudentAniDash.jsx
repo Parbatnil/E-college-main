@@ -71,7 +71,7 @@ const StudentAniDash = () => {
   return (
     <>
       <div>
-        <div className="relative bg-gradient-to-r from-indigo-600 to-blue-600 text-white h-screen flex items-center justify-center overflow-hidden p-4">
+        <div className="relative bg-gradient-to-r from-indigo-600 to-blue-600 text-white  overflow-y-auto flex items-center justify-center overflow-hidden p-4 min-h-screen">
           {/* Background Image */}
           <div
             className="absolute inset-0 w-full h-full bg-cover bg-center opacity-30"

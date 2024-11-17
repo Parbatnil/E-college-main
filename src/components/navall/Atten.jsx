@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { MdOutlineDoneOutline } from "react-icons/md";
 
 const Atten = () => {
   const [students, setStudents] = useState(null);
@@ -58,7 +59,7 @@ const Atten = () => {
                   <th className="px-4 py-2 text-left">Teacher Name</th>
                   <th className="px-4 py-2 text-left">Roll</th>
                   <th className="px-4 py-2 text-left">Paper Name</th>
-                  <th className="px-4 py-2 text-left">Total Attendance</th>
+                  <th className="px-4 py-2 text-left">Attendance</th>
                   <th className="px-4 py-2 text-left">Date</th>
                 </tr>
               </thead>
@@ -81,10 +82,7 @@ const Atten = () => {
                       {student.paper}
                     </td>
                     <td className="px-4 py-2 text-sm md:text-base">
-                      {
-                        students.filter((st) => st.paper === student.paper)
-                          .length
-                      }
+                      <MdOutlineDoneOutline className="text-green-500" />
                     </td>
                     <td className="px-4 py-2 text-sm md:text-base">
                       {student.date}
@@ -118,10 +116,10 @@ const Atten = () => {
                       key={subject}
                       className="border-b border-gray-200 hover:bg-gray-100 transition-all duration-300"
                     >
-                      <td className="px-4 py-2 md:px-6 py-3 text-gray-700 text-sm md:text-base">
+                      <td className="px-4 py-2 md:px-6 md:py-3 text-gray-700 text-sm md:text-base">
                         {subject}
                       </td>
-                      <td className="px-4 py-2 md:px-6 py-3 text-gray-700 text-sm md:text-base">
+                      <td className="px-4 py-2 md:px-6 md:py-3 text-gray-700 text-sm md:text-base">
                         {count}
                       </td>
                     </tr>
