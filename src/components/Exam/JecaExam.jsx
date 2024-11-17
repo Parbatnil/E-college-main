@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 //dialog added
 //import { Dialog } from "@headlessui/react";
 
-const Mcaexam = () => {
+const JecaExam = () => {
   const [columns, setColumns] = useState([]);
   const [records, setRecords] = useState([]);
   const [index, setIndex] = useState(0);
@@ -26,7 +26,7 @@ const Mcaexam = () => {
   useEffect(() => {
     axios
       .get(
-        "https://courseapi-3kus.onrender.com/api/courseexam?sub=mca&status=true"
+        "https://courseapi-3kus.onrender.com/api/courseexam?sub=jeca&status=true"
       )
       .then((res) => {
         const courseExamData = res.data.Courseexam;
@@ -81,7 +81,7 @@ const Mcaexam = () => {
   const submitResult = () => {
     axios
       .post("https://courseapi-3kus.onrender.com/api/result", {
-        sub: "mca",
+        sub: "jeca",
         teacher: question.teacher,
         paper: question.paper,
         student: student.name,
@@ -125,12 +125,12 @@ const Mcaexam = () => {
     <div>
       <Navbar />
       <div className="flex justify-center">
-        <div className="mt-2 font-bold text-[30px]">MCA Exam</div>
+        <div className="mt-2 font-bold text-[30px]">JECA Exam</div>
       </div>
       <div className="w-auto mx-4 mt-10 mb-6 text-black flex flex-col gap-[20px] rounded-lg hero-bg-color p-10 bg-blue-700">
         {" "}
         {/* Changed to bg-blue-700 */}
-        <h1>MCA Exam</h1>
+        <h1>JECA Exam</h1>
         <hr className="h-[2px] border-none bg-blue-700" />{" "}
         {/* Adjusted to match the new blue color */}
         {result ? (
@@ -192,4 +192,4 @@ const Mcaexam = () => {
   );
 };
 
-export default Mcaexam;
+export default JecaExam;

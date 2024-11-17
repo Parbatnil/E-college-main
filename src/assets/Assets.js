@@ -82,8 +82,8 @@ export const PROJECTS = [
     name1: "JEE Main EXAM",
     description:
       " JEE Main (JEE-Main), is an Indian standardized computer-based test for admission to various technical undergraduate programs in engineering, architecture, and planning across colleges in India..",
-    image: projectImage3,
-    Link: "/bca",
+    image: projectImage1,
+    Link: "/jee-main",
     title: "i",
     title1: "ijk",
   },
@@ -93,8 +93,8 @@ export const PROJECTS = [
     name1: "WB JECA EXAM",
     description:
       "West Bengal Joint Examination for Masters in Computer Applications. It is a common entrance exam for admission to MCA programs at West Bengal universities. ",
-    image: projectImage4,
-    Link: "/mca",
+    image: projectImage2,
+    Link: "/wb-jeca",
     title: "i",
     title1: "ijk",
   },
@@ -105,7 +105,7 @@ export const PROJECTS = [
     description:
       "West Bengal Joint Entrance Examination (WBJEE) is a state-government (West Bengal) controlled centralized test  for admission into Undergraduate Courses (like B.E / B. Tech. / B. Pharm).",
     image: projectImage3,
-    Link: "/b.tech",
+    Link: "/wb-jee",
     title: "i",
     title1: "ijk",
   },
@@ -116,7 +116,7 @@ export const PROJECTS = [
     description:
       "  GATE is the Graduate Aptitude Test in Engineering. It is an entrance exam held annually in India for admission to postgraduate programmes in the science and technology sector..",
     image: projectImage4,
-    Link: "/m.tech",
+    Link: "/gate",
     title: "i",
     title1: "ijk",
   },
@@ -127,7 +127,7 @@ export const PROJECTS = [
     description:
       "IPMAT (Integrated Programme in Management Aptitude Test) is an aptitude test (currently) offered by 5 IIMs as of now for admission into their 5-year Integrated Programme in Management (IPM)..",
     image: projectImage5,
-    Link: "/bba",
+    Link: "/ipmat",
     title: "i",
     title1: "ijk",
   },
@@ -138,11 +138,12 @@ export const PROJECTS = [
     description:
       "CAT is the Common Admission Test. It is a national-level entrance exam conducted by the Indian Institutes of Management (IIMs) for admission to their flagship MBA programs..",
     image: projectImage6,
-    Link: "/mba",
+    Link: "/cat",
     title: "i",
     title1: "ijk",
   },
 ];
+
 export const Tcourse = [
   {
     id: 14,
@@ -154,6 +155,7 @@ export const Tcourse = [
     title: "a",
     title1: "xt",
   },
+
   {
     id: 15,
     name: "MCA(TE)",
@@ -202,6 +204,72 @@ export const Tcourse = [
     image: projectImage6,
     Link: "/mbateacherok@24",
     title: "a",
+    title1: "xt",
+  },
+  {
+    id: 100,
+    name: "JEE Main",
+    name1: "JEE Main EXAM",
+    description:
+      " JEE Main (JEE-Main), is an Indian standardized computer-based test for admission to various technical undergraduate programs in engineering, architecture, and planning across colleges in India..",
+    image: projectImage1,
+    Link: "/jee-main",
+    title: "i",
+    title1: "xt",
+  },
+  {
+    id: 101,
+    name: "WB JECA",
+    name1: "WB JECA EXAM",
+    description:
+      "West Bengal Joint Examination for Masters in Computer Applications. It is a common entrance exam for admission to MCA programs at West Bengal universities. ",
+    image: projectImage2,
+    Link: "/teacherjeca404",
+    title: "i",
+    title1: "xt",
+  },
+  {
+    id: 102,
+    name: "WBJEE",
+    name1: "WBJEE EXAM",
+    description:
+      "West Bengal Joint Entrance Examination (WBJEE) is a state-government (West Bengal) controlled centralized test  for admission into Undergraduate Courses (like B.E / B. Tech. / B. Pharm).",
+    image: projectImage3,
+    Link: "/wb-jee",
+    title: "i",
+    title1: "xt",
+  },
+  {
+    id: 102,
+    name: "GATE",
+    name1: "GATE EXAM",
+    description:
+      "  GATE is the Graduate Aptitude Test in Engineering. It is an entrance exam held annually in India for admission to postgraduate programmes in the science and technology sector..",
+    image: projectImage4,
+    Link: "/gate",
+    title: "i",
+    title1: "xt",
+  },
+  {
+    id: 103,
+    name: "IPMAT",
+    name1: "IPMAT EXAM",
+    description:
+      "IPMAT (Integrated Programme in Management Aptitude Test) is an aptitude test (currently) offered by 5 IIMs as of now for admission into their 5-year Integrated Programme in Management (IPM)..",
+    image: projectImage5,
+    Link: "/ipmat",
+    title: "i",
+    title1: "xt",
+  },
+  {
+    id: 104,
+    name: "CAT",
+    name1: "CAT EXAM",
+    description:
+      "CAT is the Common Admission Test. It is a national-level entrance exam conducted by the Indian Institutes of Management (IIMs) for admission to their flagship MBA programs..",
+    image: projectImage6,
+    Link: "/cat",
+    title: "i",
     title1: "xt",
   },
 ];

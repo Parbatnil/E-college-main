@@ -37,7 +37,13 @@ import Mark from "./navall/teacher/Mark";
 import Managementcontacts from "./navall/teacher/Managementcontacts";
 import StudentProfile from "./navall/StudentProfile";
 import Atten from "./navall/Atten";
-import Courses from "./navall/Courses";
+import MyMarks from "./MyMarks";
+
+import JecaExam from "./Exam/JecaExam";
+import Jeca from "./Exam/Jeca";
+import TeacherJecaExam from "./navall/teacher/TeacherJecaExam";
+import TeacherMarks from "./navall/teacher/TeacherMarks";
+
 import Error404 from "./Error404";
 import StudentAniDash from "./navall/StudentAniDash";
 import StudentsData from "./navall/admin/StudentsData";
@@ -53,10 +59,8 @@ const Display = () => {
         <Route path="/management" element={<Management />} />
         <Route path="/student" element={<Student />} />
         <Route path="/studentdashbord/*" element={<StudentAniDash />} />
-
         <Route path="/studentdashbord/profile" element={<StudentProfile />} />
         <Route path="/studentdashbord/atten" element={<Atten />} />
-
         <Route path="/bca" element={<Bca />} />
         <Route path="/mca" element={<Mca />} />
         <Route path="/b.tech" element={<Btech />} />
@@ -80,8 +84,15 @@ const Display = () => {
           path="/dashboard/:registerNumber"
           element={<TeacherDashboard />}
         />
+        {/* //Exams section */}
+        <Route path="/jee-main" element={<DisplayHome />} />
+        <Route path="/wb-jeca" element={<Jeca />} />
+        <Route path="/wb-jee" element={<DisplayHome />} />
+        <Route path="/gate" element={<DisplayHome />} />
+        <Route path="/ipmat" element={<DisplayHome />} />
+        <Route path="/cat" element={<DisplayHome />} />
+        {/* -- */}
         <Route path="/student-data" element={<StudentsData />} />
-
         <Route path="/teachers-data" element={<TeachersDataPage />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/teacher-register" element={<TeacherRegister />} />
@@ -91,8 +102,12 @@ const Display = () => {
         <Route path="/mark" element={<Mark />} />
         <Route path="/managementcontacts" element={<Managementcontacts />} />
         <Route path="*" element={<Error404 />} />
-
         <Route path="/student-register" element={<Addstudent />} />
+        <Route path="/404wbjeca" element={<JecaExam />} />
+        <Route path="/teacherjeca404" element={<TeacherJecaExam />} />
+        <Route path="/my-marks" element={<MyMarks />} />
+        <Route path="/teacher-marks" element={<TeacherMarks />} />
+
         {/* <Route path="/studentdashbord/*" element={<Studentdashbord />} /> */}
       </Routes>
     </div>

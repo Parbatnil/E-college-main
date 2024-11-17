@@ -10,6 +10,7 @@ import Atten from "./Atten";
 import Courses from "./Courses";
 import ErrorSection7 from "./ErrorSection7";
 import HashLoader from "react-spinners/HashLoader";
+import MyMarks from "../MyMarks";
 
 const StudentAniDash = () => {
   const [student, setStudent] = useState(null);
@@ -153,19 +154,16 @@ const StudentAniDash = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}
                 className="bg-white text-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
-                onClick={() => navigate("/studentdashbord/my-marks")} // Adding a navigation link
+                onClick={() => navigate("/my-marks")} // Adding a navigation link
               >
                 <div className="flex items-center justify-center mb-4">
                   <div className="w-12 h-12 bg-indigo-500 text-white rounded-full flex items-center justify-center">
                     <FaArrowRight size={24} />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">
-                  Track Your Progress
-                </h3>
+                <h3 className="text-xl font-semibold mb-3">Marks</h3>
                 <p className="text-gray-600">
-                  Get personalized feedback and track your learning progress
-                  with ease.
+                  Get Your marks based on examination
                 </p>
               </motion.div>
               {/* Call to Action Button with Icon */}
@@ -191,7 +189,7 @@ const StudentAniDash = () => {
       <Routes>
         {/* <Route path="/" element={<StudentProfile student={student} />} /> */}
         <Route path="/atten" element={<Atten />} />
-        <Route path="/mycourse" element={<Courses student={student} />} />
+        {/* <Route path="/my-marks" element={<MyMarks />} /> */}
       </Routes>
     </>
   );
