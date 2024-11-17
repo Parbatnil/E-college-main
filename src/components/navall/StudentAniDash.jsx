@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import { motion } from "framer-motion";
 import backgroundImg from "../../assets/white.jpg";
 import axios from "axios";
@@ -104,22 +105,6 @@ const StudentAniDash = () => {
               We offer a personalized learning experience that helps you grow.
             </motion.p>
 
-            {/* Call to Action Button with Icon */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.5 }}
-              className="flex justify-center mt-8"
-            >
-              <a
-                href="#"
-                className="px-8 py-4 bg-yellow-500 text-blue-800 rounded-lg font-semibold text-xl transition-all duration-300 transform hover:scale-105 hover:bg-yellow-400 flex items-center"
-              >
-                Get Started
-                <FaArrowRight className="ml-2 text-xl" />
-              </a>
-            </motion.div>
-
             {/* Features Section */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 px-4">
               {/* Feature 1 */}
@@ -182,6 +167,22 @@ const StudentAniDash = () => {
                   Get personalized feedback and track your learning progress
                   with ease.
                 </p>
+              </motion.div>
+              {/* Call to Action Button with Icon */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5 }}
+                className="flex justify-center mt-8"
+                onClick={() => navigate("/")}
+              >
+                <a
+                  href="#"
+                  className="px-8 py-4 bg-yellow-500 text-blue-800 rounded-lg font-semibold text-xl transition-all duration-300 transform hover:scale-105 hover:bg-yellow-400 flex items-center"
+                >
+                  <FaArrowLeft className="ml-2 text-xl" />
+                  Back to Home
+                </a>
               </motion.div>
             </div>
           </div>

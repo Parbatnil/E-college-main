@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { MdOutlineDoneOutline } from "react-icons/md";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Atten = () => {
   const [students, setStudents] = useState(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -127,6 +130,21 @@ const Atten = () => {
                 </tbody>
               </table>
             </div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5 }}
+              className="flex justify-center mt-8"
+              onClick={() => navigate("/studentdashbord")}
+            >
+              <a
+                href="#"
+                className="px-8 py-4 bg-blue-800 text-yellow-500 rounded-lg font-semibold text-xl transition-all duration-300 transform hover:scale-105 hover:bg-yellow-400 flex items-center"
+              >
+                <FaArrowLeft className="ml-2 text-xl" />
+                Back to Dashboard
+              </a>
+            </motion.div>
           </div>
         </>
       ) : (

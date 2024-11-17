@@ -1,6 +1,7 @@
 import React from "react";
 import { FaUserGraduate } from "react-icons/fa";
-
+import { motion } from "framer-motion";
+import { FaArrowLeft } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -186,6 +187,21 @@ const StudentProfile = () => {
               ))}
             </tbody>
           </table>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5 }}
+            className="flex justify-center mt-8"
+            onClick={() => navigate("/studentdashbord")}
+          >
+            <a
+              href="#"
+              className="px-8 py-4 bg-blue-800 text-yellow-500 rounded-lg font-semibold text-xl transition-all duration-300 transform hover:scale-105 hover:bg-yellow-400 flex items-center"
+            >
+              <FaArrowLeft className="ml-2 text-xl" />
+              Back to Dashboard
+            </a>
+          </motion.div>
         </div>
       </div>
     </div>

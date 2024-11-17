@@ -6,8 +6,8 @@ const Exam = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="pt-10 mx-3 bg-blue-900" id="project">
-      <h2 className="mb-12 text-center text-4xl font-semibold text-white">
+    <section className="py-10 mx-3 bg-blue-900" id="project">
+      <h2 className="mb-12 text-center text-4xl  text-white hover:text-red-200 font-bold">
         Popular Exams
       </h2>
       <div className="flex items-center justify-center px-0 sm:px-7">
