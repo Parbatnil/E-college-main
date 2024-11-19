@@ -93,7 +93,7 @@ const TeacherNav = () => {
           </div>
           <div
             className="hover:text-black cursor-pointer"
-            onClick={() => navigate("/mark")}
+            onClick={() => navigate("/teacher-marks")}
           >
             Marks
           </div>
@@ -190,7 +190,7 @@ const TeacherNav = () => {
             </li>
             <li
               className="hover:text-black cursor-pointer"
-              onClick={() => navigate("/mark")}
+              onClick={() => navigate("/teacher-marks")}
             >
               Marks
             </li>
