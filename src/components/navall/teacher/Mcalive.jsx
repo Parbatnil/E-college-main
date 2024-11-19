@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Navbar from "../../Navbar";
 import { MCA } from "../../../assets/Assets";
 import axios from "axios";
 import { mcaPaper } from "../../../assets/mcadata";
 import TeacherNav from "../../TeacherNav";
-import { MdDeleteForever } from "react-icons/md";
 
 const Mcalive = () => {
   const [papers, setPapers] = useState("");
@@ -23,6 +22,8 @@ const Mcalive = () => {
   useEffect(() => {
     const tname = localStorage.getItem("teachername");
     setTrack(tname);
+    // console.log(tname)
+    // console.log(fixt)
     axios
       .get("https://courseapi-3kus.onrender.com/api/products?sub=mcaLIVE")
       .then((res) => {
@@ -34,7 +35,17 @@ const Mcalive = () => {
 
   const submit = (e) => {
     e.preventDefault();
+    const today = new Date();
     const tname = localStorage.getItem("teachername");
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+    const day = String(today.getDate()).padStart(2, "0");
+    const year = String(today.getFullYear()).slice(-2); // Get the last two digits of the year
+
+    // Combine into MM/DD/YY format
+    const formattedDate = `${month}/${day}/${year}`;
+
+    console.log(formattedDate);
+
     axios
       .post("https://courseapi-3kus.onrender.com/api/products", {
         name: video,
@@ -43,11 +54,21 @@ const Mcalive = () => {
         sub: "mcaLIVE",
         time: time,
         teacher: tname,
-        date: fixt,
+        date: formattedDate,
       })
       .then((res) => alert("Data is Added successfully"))
       .catch((err) => console.log(err));
   };
+  useEffect(() => {
+    axios
+      .get("https://courseapi-3kus.onrender.com/api/products?sub=mcaLIVE")
+      .then((res) => {
+        // console.log(res.data.mydata)
+        setColumns(Object.keys(res.data.mydata));
+        setRecords(res.data.mydata);
+      })
+      .catch((err) => console.log(err));
+  }, [submit]);
 
   const handelDelete = (_id) => {
     const confirm = window.confirm("Would you like to Delete?");
@@ -61,19 +82,24 @@ const Mcalive = () => {
     }
   };
 
-  // Get today's date in 'MM/DD/YY' format for comparison
-  const todayDate =
-    new Date().toLocaleDateString("en-US").slice(0, 8) +
-    new Date().getFullYear().toString().slice(-2);
+  // Get today's date in MM/DD/YY format
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+  const day = String(today.getDate()).padStart(2, "0");
+  const year = String(today.getFullYear()).slice(-2); // Get last two digits of the year
+  const todayDate = `${month}/${day}/${year}`;
 
   // Filter records to show only those whose date matches today's date
-  const filteredRecords = records.filter((record) => record.date === todayDate);
+  const filteredRecords = records.filter((record) => {
+    const recordDate = record.date?.trim(); // Ensure no extra spaces
+    return recordDate === todayDate;
+  });
 
   return (
-    <div className="bg-[#1e3a8a] min-h-screen">
+    <div>
       <TeacherNav />
       <div className="flex justify-center items-center p-4 ">
-        <h1 className="text-xl  text-yellow-400">LIVE CLASS(MCA)</h1>
+        <h1 className="text-xl text-black">LIVE CLASS(MCA)</h1>
       </div>
 
       <div className="flex justify-center items-center px-0 sm:px-3">
@@ -85,7 +111,7 @@ const Mcalive = () => {
                   <div>
                     <h3>SELECT PAPER</h3>
                     <select
-                      className="border-2 border-gray-600 p-2 rounded-md w-80 bg-[#3b82f6]"
+                      className="border-2 border-gray-400 p-2 rounded-md w-80"
                       value={papers}
                       onChange={(e) => setPapers(e.target.value)}
                       required
@@ -103,7 +129,7 @@ const Mcalive = () => {
                     type="text"
                     name="video"
                     id="video"
-                    className="border-2 border-gray-600 p-2 rounded-md w-80 bg-[#1e3a8a]"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
                     placeholder="Eg.- Basic python"
                     value={video}
                     onChange={(e) => setVideo(e.target.value)}
@@ -115,7 +141,7 @@ const Mcalive = () => {
                     type="text"
                     name="time"
                     id="time"
-                    className="border-2 border-gray-600 p-2 rounded-md w-80 bg-[#1e3a8a]"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
                     placeholder="Eg.- 10.00a.m"
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
@@ -127,14 +153,14 @@ const Mcalive = () => {
                     type="text"
                     name="link"
                     id="link"
-                    className="border-2 border-gray-600 p-2 rounded-md w-80 bg-[#1e3a8a]"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
                     placeholder="Eg.- https://www.google.com"
                     value={link}
                     onChange={(e) => setLink(e.target.value)}
                     required
                   />
                   <div className="flex justify-center items-center mt-4">
-                    <button className="bg-[#2563eb] text-black py-2 px-8 rounded-full hover:bg-[#1e40af] duration-300">
+                    <button className="bg-primary text-white bg-orange-500 cursor-pointer hover:scale-105 duration-300 py-2 px-8 rounded-full ">
                       Submit
                     </button>
                   </div>
@@ -143,7 +169,7 @@ const Mcalive = () => {
                 <h1 className="text-xl">Table</h1>
                 <div className="flex justify-center">
                   <div className="container mt-2">
-                    <table className="table text-black">
+                    <table className="table">
                       <thead>
                         <tr>
                           <th>Topic</th>
@@ -155,26 +181,26 @@ const Mcalive = () => {
                       <tbody>
                         {filteredRecords.map((d, i) => (
                           <tr key={i}>
-                            <td className="border-2 border-gray-600 p-2 rounded-md w-80 sm:w-auto bg-[#1e3a8a] text-white">
+                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
                               {d.name} {d.time}
                             </td>
 
-                            <td className="border-2 border-gray-600 p-2 rounded-md w-80 sm:w-auto bg-[#1e3a8a] text-white">
+                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
                               {d.subtitle}
                             </td>
-                            <td className="border-2 border-gray-600 p-2 rounded-md w-80 sm:w-auto bg-[#1e3a8a] text-white">
+                            <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
                               {d.teacher}
                             </td>
                             {track === d.teacher ? (
                               <td
-                                className="border-2 border-gray-600 p-2 rounded-md w-80 sm:w-auto bg-yellow-300 cursor-pointer"
+                                className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-yellow-200 cursor-pointer"
                                 onClick={(e) => handelDelete(d._id)}
                               >
-                                <MdDeleteForever className="text-2xl text-red-900 hover:text-blue-500" />
+                                Del
                               </td>
                             ) : (
-                              <td className="border-2 border-gray-600 p-2 rounded-md w-80 sm:w-auto bg-[#0f172a] cursor-pointer">
-                                <MdDeleteForever className="text-4xl" />
+                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-800 cursor-pointer">
+                                Del
                               </td>
                             )}
                           </tr>
