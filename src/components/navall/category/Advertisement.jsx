@@ -22,6 +22,7 @@ const Advertisement = () => {
             className="rounded-2xl shadow-lg w-full max-w-xl"
             autoPlay
             loop
+            muted
           >
             <source src={adverticement} type="video/mp4" />
             Your browser does not support the video tag.
