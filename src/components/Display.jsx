@@ -48,6 +48,7 @@ import Error404 from "./Error404";
 import StudentAniDash from "./navall/StudentAniDash";
 import StudentsData from "./navall/admin/StudentsData";
 import Addstudent from "./navall/admin/Addstudent";
+import ReviewsPage from "./reviews/ReviewsPage";
 const Display = () => {
   return (
     <div>

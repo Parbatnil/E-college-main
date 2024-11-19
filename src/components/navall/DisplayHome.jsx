@@ -7,6 +7,7 @@ import Mentors from "./category/Mentors";
 import Advertisement from "./category/Advertisement";
 import Footer from "../Footer";
 import Ribbon from "./Ribbon";
+import ReviewsPage from "../reviews/ReviewsPage";
 
 const DisplayHome = () => {
   return (
@@ -18,6 +19,7 @@ const DisplayHome = () => {
       <Advertisement />
       <Exam />
       <Mentors />
+      <ReviewsPage />
       <Footer />
     </>
   );
