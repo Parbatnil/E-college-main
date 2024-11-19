@@ -24,7 +24,7 @@ const Jeca = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          "https://courseapi-3kus.onrender.com/api/products?sub=mca"
+          "https://courseapi-3kus.onrender.com/api/products?sub=jeca"
         );
         setColumns(Object.keys(res.data.mydata));
         setTestVideo(res.data.mydata);
@@ -33,8 +33,8 @@ const Jeca = () => {
         const studentRes = await axios.get(
           `https://courseapi-3kus.onrender.com/api/students?email=${p}`
         );
-        const student = studentRes.data.students.find((e) => e.mca);
-        setLock(student ? student.mca : false);
+        const student = studentRes.data.students.find((e) => e.wbjeca);
+        setLock(student ? student.wbjeca : false);
       } catch (err) {
         setErrorMessage("Failed to fetch data. Please try again.");
         console.error(err);
@@ -118,8 +118,8 @@ const Jeca = () => {
       let fast = time.slice(0, 6);
       let result = fast.concat(enddate);
       await axios.put(`https://courseapi-3kus.onrender.com/api/student/${p}`, {
-        mca: true,
-        course: "MCA",
+        wbjeca: true,
+        course: "JECA",
         starting: time,
         end: result,
       });
@@ -151,7 +151,7 @@ const Jeca = () => {
         <div>
           <Navbar />
           <div className=" flex justify-center items-center">
-            <h1 className=" text-xl mt-3 sm:text-3xl">MCA</h1>
+            <h1 className=" text-xl mt-3 sm:text-3xl">WBJECA</h1>
           </div>
           <div className=" flex justify-center items-center px-0 sm:px-3 ">
             <div className=" container mt-2 mx-3 mb-6">

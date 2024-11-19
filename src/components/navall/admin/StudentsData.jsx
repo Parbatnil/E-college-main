@@ -132,7 +132,7 @@ const StudentsData = () => {
 
   // Filter students based on the selected stream
   const filteredStudents = selectedStream
-    ? students.filter((student) => student.course.includes(selectedStream))
+    ? students.filter((student) => student.course === selectedStream)
     : students;
 
   return (
@@ -190,6 +190,7 @@ const StudentsData = () => {
                   <th className="py-2 px-4 border-b border-gray-500">
                     Roll Number
                   </th>
+                  <th className="py-2 px-4 border-b border-gray-500">Course</th>
                   <th className="py-2 px-4 border-b border-gray-500">
                     Start Date
                   </th>
@@ -213,6 +214,9 @@ const StudentsData = () => {
                     </td>
                     <td className="py-2 px-4 border-b border-gray-500">
                       {student.roll}
+                    </td>
+                    <td className="py-2 px-4 border-b border-gray-500">
+                      {student.course}
                     </td>
                     <td className="py-2 px-4 border-b border-gray-500">
                       {student.starting}

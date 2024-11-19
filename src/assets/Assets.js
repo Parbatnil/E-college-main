@@ -1,9 +1,15 @@
 import projectImage1 from "./BCA.jpeg";
 import projectImage2 from "./MCA.png";
-import projectImage3 from "./project5.jpeg";
-import projectImage4 from "./project4.jpeg";
-import projectImage5 from "./project5.jpeg";
-import projectImage6 from "./project6.jpeg";
+import projectImage3 from "./Btech.png";
+import projectImage4 from "./Mtech.png";
+import projectImage5 from "./BBA.jpeg";
+import projectImage6 from "./MBA.png";
+import projectImage7 from "./JEEM.jpeg";
+import projectImage8 from "./JECA.jpeg";
+import projectImage9 from "./wbjee.jpeg";
+import projectImage10 from "./Gate.jpeg";
+import projectImage11 from "./IP.jpeg";
+import projectImage12 from "./CAT.jpeg";
 import mentorImage1 from "./mentor1.webp";
 import mentorImage2 from "./mentor2.jpg";
 import mentorImage3 from "./mentor3.jpg";
@@ -82,7 +88,7 @@ export const PROJECTS = [
     name1: "JEE Main EXAM",
     description:
       " JEE Main (JEE-Main), is an Indian standardized computer-based test for admission to various technical undergraduate programs in engineering, architecture, and planning across colleges in India..",
-    image: projectImage1,
+    image: projectImage7,
     Link: "/jee-main",
     title: "i",
     title1: "ijk",
@@ -93,7 +99,7 @@ export const PROJECTS = [
     name1: "WB JECA EXAM",
     description:
       "West Bengal Joint Examination for Masters in Computer Applications. It is a common entrance exam for admission to MCA programs at West Bengal universities. ",
-    image: projectImage2,
+    image: projectImage8,
     Link: "/wb-jeca",
     title: "i",
     title1: "ijk",
@@ -104,7 +110,7 @@ export const PROJECTS = [
     name1: "WBJEE EXAM",
     description:
       "West Bengal Joint Entrance Examination (WBJEE) is a state-government (West Bengal) controlled centralized test  for admission into Undergraduate Courses (like B.E / B. Tech. / B. Pharm).",
-    image: projectImage3,
+    image: projectImage9,
     Link: "/wb-jee",
     title: "i",
     title1: "ijk",
@@ -115,7 +121,7 @@ export const PROJECTS = [
     name1: "GATE EXAM",
     description:
       "  GATE is the Graduate Aptitude Test in Engineering. It is an entrance exam held annually in India for admission to postgraduate programmes in the science and technology sector..",
-    image: projectImage4,
+    image: projectImage10,
     Link: "/gate",
     title: "i",
     title1: "ijk",
@@ -126,7 +132,7 @@ export const PROJECTS = [
     name1: "IPMAT EXAM",
     description:
       "IPMAT (Integrated Programme in Management Aptitude Test) is an aptitude test (currently) offered by 5 IIMs as of now for admission into their 5-year Integrated Programme in Management (IPM)..",
-    image: projectImage5,
+    image: projectImage11,
     Link: "/ipmat",
     title: "i",
     title1: "ijk",
@@ -137,7 +143,7 @@ export const PROJECTS = [
     name1: "CAT EXAM",
     description:
       "CAT is the Common Admission Test. It is a national-level entrance exam conducted by the Indian Institutes of Management (IIMs) for admission to their flagship MBA programs..",
-    image: projectImage6,
+    image: projectImage12,
     Link: "/cat",
     title: "i",
     title1: "ijk",

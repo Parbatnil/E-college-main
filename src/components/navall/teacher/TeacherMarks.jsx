@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import HashLoader from "react-spinners/HashLoader";
+import TeacherNav from "../../TeacherNav";
 
 const TeacherMarks = () => {
   const [student, setStudent] = useState(null);
@@ -55,7 +56,8 @@ const TeacherMarks = () => {
   }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto ">
+      <TeacherNav />
       {student ? (
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">

@@ -1,42 +1,72 @@
-import React from 'react'
-import Navbar from '../Navbar'
-import { PROJECTS } from '../../assets/Assets'
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import Navbar from "../Navbar";
+import { PROJECTS } from "../../assets/Assets";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
 const Course = () => {
-    const navigate= useNavigate();
+  const navigate = useNavigate();
+
   return (
     <div>
-        <Navbar/>
-        <section className='pt-5 mx-3 mb-4'id='project'>
-        <h2 className='mb-8 text-center text-3xl lg:text-4xl'>Course</h2>
-        <div className='flex  items-center justify-center px-0 sm:px-7'>
-        <div className=' grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-            {PROJECTS .filter((project) =>{
-                    
-                    if(project.title1.toLowerCase().includes("abc".toLowerCase())){
-                      return project;}
-                  })
-            
-            .map((project)=>(
-                <div key={project.id} className='group relative overflow-hidden rounded-3xl'>
-                    <img src={project.image} alt={project.name} className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-110' />
-                <div className=' absolute inset-0 flex flex-col items-center justify-center text-white opacity-100 backdrop-blur-lg transition-opacity duration-500 '>
-                    <h3 className=' mb-2 text-3xl'>{project.name}</h3>
-                    <p className='mb-12 p-4 text-sm sm:text-lg'>{project.description}</p>
-                    <a onClick={()=> navigate(project.Link)} target='_blank' rel='noopener noreferrer' className=' rounded-full bg-white px-4 py-2 text-black hover:bg-gray-300'>
-                        <div className=' flex items-center'>
-                            <span className=' cursor-pointer'>View Course</span>
-                            {/* <MdArrowOutward/> */}
-                        </div>
-                    </a>
-                </div>
-                </div>
-            ))}
-        </div>
-        </div>
-    </section>
-    </div>
-  )
-}
+      {/* Navbar */}
+      <Navbar />
 
-export default Course
+      {/* Course Section */}
+      <section className="pt-10 px-3 md:px-10" id="project">
+        <h2 className="mb-12 text-center text-4xl lg:text-5xl font-extrabold text-blue-900">
+          Courses
+        </h2>
+        <div className="flex items-center justify-center">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {PROJECTS.filter((project) => {
+              if (project.title.toLowerCase().includes("a".toLowerCase())) {
+                return project;
+              }
+            }).map((project) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="max-w-sm w-full bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-300 transform hover:-translate-y-3 hover:shadow-lg"
+              >
+                {/* Image Section */}
+                <div className="relative">
+                  <img
+                    className="w-full h-48 object-cover"
+                    src={project.image}
+                    alt={project.name}
+                  />
+                  <span className="absolute top-4 left-4 bg-blue-500 text-white text-xs uppercase font-bold py-1 px-3 rounded-full shadow-md">
+                    {`Unlock Your Future with ${project.name}`}
+                  </span>
+                </div>
+
+                {/* Content Section */}
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                    {project.name}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-5">
+                    {project.description}
+                  </p>
+                  <motion.button
+                    onClick={() => navigate(project.Link)}
+                    whileHover={{ scale: 1.1 }}
+                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-sm font-medium py-2 rounded-lg hover:from-blue-600 hover:to-indigo-600 transition-colors duration-300"
+                  >
+                    View Course
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Course;

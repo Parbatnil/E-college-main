@@ -61,7 +61,7 @@ const TeacherNav = () => {
   return (
     <div>
       {/* Desktop Menu */}
-      <nav className="lg:flex hidden justify-between items-center w-full h-16 bg-slate-200">
+      <nav className="lg:flex hidden justify-between items-center w-full h-16 text-white border-gray-200 dark:bg-[#1E3A8A]">
         {/* Logo */}
         <div className="flex justify-center items-center gap-3">
           <img
@@ -71,51 +71,45 @@ const TeacherNav = () => {
             alt="logo"
           />
           <div
-            className="text-green-700 pb-3 font-semibold text-base cursor-pointer"
+            className="text-yellow-400 pb-3 font-semibold text-base cursor-pointer"
             onClick={() => navigate("/teachercourseok@24")}
           >
             E-College
           </div>
         </div>
         {/* Menu Items */}
-        <div className="flex justify-center items-center gap-5 text-gray-600">
+        <div className="flex justify-center items-center gap-5 text-white ">
           <div
-            className="hover:text-black cursor-pointer"
+            className="hover:text-yellow-300  cursor-pointer"
             onClick={() => navigate("/")}
           >
             Home
           </div>
           <div
-            className="hover:text-black cursor-pointer"
+            className="hover:text-yellow-300 cursor-pointer"
             onClick={() => navigate("/attendence")}
           >
             Attendance
           </div>
           <div
-            className="hover:text-black cursor-pointer"
+            className="hover:text-yellow-300 cursor-pointer"
             onClick={() => navigate("/teacher-marks")}
           >
             Marks
-          </div>
-          <div
-            className="hover:text-black cursor-pointer"
-            onClick={() => navigate("/managementcontacts")}
-          >
-            Management Contacts
           </div>
         </div>
         {/* Login */}
         <div className="flex justify-center items-center gap-3 m-2">
           {log ? (
             <button
-              className="bg-orange-500 text-white py-2 px-4 rounded-3xl"
+              className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-white hover:text-blue-400"
               onClick={getlog}
             >
               LogIn
             </button>
           ) : (
             <button
-              className="bg-orange-500 text-white py-2 px-4 rounded-3xl"
+              className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-white hover:text-blue-400"
               onClick={update}
             >
               LogOut
@@ -132,7 +126,7 @@ const TeacherNav = () => {
       </nav>
 
       {/* Mobile Menu */}
-      <div className="lg:hidden bg-slate-200">
+      <div className="lg:hidden text-white border-gray-200 dark:bg-[#1E3A8A]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* Toggle Mobile Menu */}
@@ -155,7 +149,7 @@ const TeacherNav = () => {
                 alt="logo"
               />
               <div
-                className="text-green-700 pb-2 font-semibold text-sm cursor-pointer"
+                className="text-yellow-400 pb-2 font-semibold text-sm cursor-pointer"
                 onClick={() => navigate("/teachercourseok@24")}
               >
                 E-College
@@ -175,37 +169,38 @@ const TeacherNav = () => {
 
         {/* Mobile Menu Items */}
         {isMobileMenuOpen && (
-          <ul className="mx-2 p-2 mt-2 flex flex-col gap-4 text-gray-600 bg-slate-200 py-5 rounded-md">
+          <ul className="mx-2 p-2 mt-2 flex flex-col gap-4 text-white border-gray-200 dark:bg-[#1E3A8A] py-5 rounded-md">
             <li
-              className="hover:text-black cursor-pointer"
+              className="hover:text-yellow-300 cursor-pointer"
               onClick={() => navigate("/")}
             >
               Home
             </li>
             <li
-              className="hover:text-black cursor-pointer"
+              className="hover:text-yellow-300 cursor-pointer"
               onClick={() => navigate("/attendence")}
             >
               Attendance
             </li>
             <li
-              className="hover:text-black cursor-pointer"
+              className="hover:text-yellow-300 cursor-pointer"
               onClick={() => navigate("/teacher-marks")}
             >
               Marks
             </li>
-            <li
-              className="hover:text-black cursor-pointer"
-              onClick={() => navigate("/managementcontacts")}
-            >
-              Management Contacts
-            </li>
+
             {log ? (
-              <li className="hover:text-black cursor-pointer" onClick={getlog}>
+              <li
+                className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-white hover:text-blue-400"
+                onClick={getlog}
+              >
                 LogIn
               </li>
             ) : (
-              <li className="hover:text-black cursor-pointer" onClick={update}>
+              <li
+                className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-white hover:text-blue-400"
+                onClick={update}
+              >
                 LogOut
               </li>
             )}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import { PROJECTS } from "../../assets/Assets";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -9,6 +10,7 @@ const Search = () => {
 
   return (
     <div>
+      {/* Navbar */}
       <Navbar />
       <div className="flex items-center justify-center p-4">
         <input
@@ -18,9 +20,13 @@ const Search = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <section className="pt-10 mx-3" id="project">
-        <div className="flex items-center justify-center px-0 sm:px-7">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {/* Course Section */}
+      <section className="pt-10 px-3 md:px-10" id="project">
+        <h2 className="mb-12 text-center text-4xl lg:text-5xl font-extrabold text-blue-900">
+          Courses
+        </h2>
+        <div className="flex items-center justify-center">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {PROJECTS.filter((project) => {
               if (searchTerm === "") return null;
               else if (
@@ -28,32 +34,43 @@ const Search = () => {
               )
                 return project;
             }).map((project) => (
-              <div
+              <motion.div
                 key={project.id}
-                className="group relative overflow-hidden rounded-3xl"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="max-w-sm w-full bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-300 transform hover:-translate-y-3 hover:shadow-lg"
               >
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-blue-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-lg p-4 rounded-xl">
-                  <h3 className="mb-2 text-2xl sm:text-3xl font-semibold">
+                {/* Image Section */}
+                <div className="relative">
+                  <img
+                    className="w-full h-48 object-cover"
+                    src={project.image}
+                    alt={project.name}
+                  />
+                  <span className="absolute top-4 left-4 bg-blue-500 text-white text-xs uppercase font-bold py-1 px-3 rounded-full shadow-md">
+                    {`Unlock Your Future with ${project.name}`}
+                  </span>
+                </div>
+
+                {/* Content Section */}
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
                     {project.name}
                   </h3>
-                  <p className="mb-6 text-sm sm:text-lg text-center">
+                  <p className="text-gray-600 text-sm mb-5">
                     {project.description}
                   </p>
-                  <button
+                  <motion.button
                     onClick={() => navigate(project.Link)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white text-blue-600 px-6 py-2 rounded-full hover:bg-gray-200 transition duration-300 font-medium"
+                    whileHover={{ scale: 1.1 }}
+                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-sm font-medium py-2 rounded-lg hover:from-blue-600 hover:to-indigo-600 transition-colors duration-300"
                   >
                     View Course
-                  </button>
+                  </motion.button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

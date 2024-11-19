@@ -16,10 +16,13 @@ const Bcaclass = () => {
   const [refresh, setRefresh] = useState(false); // New state for auto-refresh
 
   useEffect(() => {
-    const todayDate =
-      new Date().toLocaleDateString("en-US").slice(0, 8) +
-      new Date().getFullYear().toString().slice(-2);
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Add leading zero to month
+    const day = String(today.getDate()).padStart(2, "0"); // Add leading zero to day
+    const year = String(today.getFullYear()).slice(-2); // Get last two digits of year
+    const todayDate = `${month}/${day}/${year}`; // Format: MM/DD/YY
     setDate(todayDate);
+
     axios
       .get("https://courseapi-3kus.onrender.com/api/products?sub=bcaLIVE")
       .then((res) => {
@@ -58,7 +61,7 @@ const Bcaclass = () => {
     const fetchStudents = async () => {
       try {
         const response = await axios.get(
-          `https://courseapi-3kus.onrender.com/api/atten/?roll=${roll}&date=${fixt}`
+          `https://courseapi-3kus.onrender.com/api/atten/?roll=${roll}&date=${date}`
         );
         setStudents(response.data.attend);
       } catch (error) {
@@ -83,7 +86,7 @@ const Bcaclass = () => {
           sub: "bcaLIVE",
           teacher: a.slice(2, 7),
           paper: b,
-          date: fixt,
+          date: date,
           student: studentname,
           roll: roll,
         })
@@ -96,11 +99,17 @@ const Bcaclass = () => {
     }
   };
 
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+  const day = String(today.getDate()).padStart(2, "0");
+  const year = String(today.getFullYear()).slice(-2); // Get last two digits of the year
+  const todayDate = `${month}/${day}/${year}`;
+
   return (
     <div>
       <Navbar />
       <div className=" flex justify-center items-center p-4 ">
-        <h1 className="text-xl text-black">Live Class(MCA)</h1>
+        <h1 className="text-xl text-black">Live Class(Bca)</h1>
       </div>
 
       <div className=" flex justify-center items-center px-0 sm:px-3">
@@ -122,7 +131,13 @@ const Bcaclass = () => {
                       </thead>
                       <tbody>
                         {records
-                          .filter((e) => e.date === date)
+                          .filter((e) => {
+                            // Parse and reformat API date
+                            const recordDate = e.date?.trim(); // Convert to Date object
+                            // const formattedApiDate = `${String(apiDate.getMonth() + 1).padStart(2, '0')}/${String(apiDate.getDate()).padStart(2, '0')}/${String(apiDate.getFullYear()).slice(-2)}`;
+
+                            return recordDate === todayDate;
+                          })
                           .map((d, i) => (
                             <tr key={i}>
                               <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
@@ -136,9 +151,9 @@ const Bcaclass = () => {
                               </td>
                               <td
                                 className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-red-500 cursor-pointer"
-                                onClick={() => {
-                                  attend(d.teacher, d.subtitle, d.link);
-                                }}
+                                onClick={() =>
+                                  attend(d.teacher, d.subtitle, d.link)
+                                }
                               >
                                 live{d.time}
                               </td>

@@ -1,25 +1,28 @@
 import React from "react";
 import { motion } from "framer-motion";
+import review1 from "../../../public/review1.jpeg";
+import review2 from "../../../public/review2.jpeg";
+import review3 from "../../../public/review3.jpeg";
 
 const reviews = [
   {
     id: 1,
-    name: "John Doe",
-    avatar: "https://via.placeholder.com/100",
+    name: "Abhmanyu Singh",
+    avatar: review1,
     review: "Amazing service and support. Highly recommend!",
     rating: 5,
   },
   {
     id: 2,
-    name: "Jane Smith",
-    avatar: "https://via.placeholder.com/100",
+    name: "Ankita Sharma",
+    avatar: review2,
     review: "Great experience! Very user-friendly.",
     rating: 4,
   },
   {
     id: 3,
-    name: "Samuel Green",
-    avatar: "https://via.placeholder.com/100",
+    name: "Rohan agarwal",
+    avatar: review3,
     review: "Good value for the price. Satisfied with the service.",
     rating: 4,
   },

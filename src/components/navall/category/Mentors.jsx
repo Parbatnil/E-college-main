@@ -48,7 +48,7 @@ const Mentors = () => {
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="bg-orange-500 text-white px-6 py-2 rounded-full shadow-lg hover:bg-orange-600 transition-all"
+                    className="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg hover:bg-white hover:text-blue-800 transition-all"
                   >
                     <a href="mailto:ecollege2024@gmail.com">Message</a>
                   </motion.button>

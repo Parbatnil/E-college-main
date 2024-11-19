@@ -2,52 +2,65 @@ import React from "react";
 import { Tcourse } from "../../../assets/Assets";
 import { useNavigate } from "react-router-dom";
 import TeacherNav from "../../TeacherNav";
+import { motion } from "framer-motion";
 
 const Teachercourse = () => {
   const navigate = useNavigate();
 
   return (
     <div>
+      {/* Teacher Navbar */}
       <TeacherNav />
-      <section className="pt-10 mx-3 mb-4" id="project">
-        <h2 className="mb-8 text-center text-3xl lg:text-4xl">
-          Course (Teacher)
+
+      {/* Course Section */}
+      <section className="pt-10 px-3 md:px-10" id="project">
+        <h2 className="mb-12 text-center text-4xl lg:text-5xl font-extrabold text-blue-900">
+          Courses (Teacher)
         </h2>
-        <div className="flex items-center justify-center px-0 sm:px-7">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex items-center justify-center">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {Tcourse.filter((project) => {
               if (project.title1.toLowerCase().includes("xt".toLowerCase())) {
                 return project;
               }
             }).map((project) => (
-              <div
+              <motion.div
                 key={project.id}
-                className="relative rounded-3xl bg-white shadow-lg overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="max-w-sm w-full bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-300 transform hover:-translate-y-3 hover:shadow-lg"
               >
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-64 object-cover rounded-t-3xl"
-                />
+                {/* Image Section */}
+                <div className="relative">
+                  <img
+                    className="w-full h-48 object-cover"
+                    src={project.image}
+                    alt={project.name}
+                  />
+                  <span className="absolute top-4 left-4 bg-blue-500 text-white text-xs uppercase font-bold py-1 px-3 rounded-full shadow-md">
+                    {` ${project.name}`}
+                  </span>
+                </div>
+
+                {/* Content Section */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-semibold text-gray-800">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
                     {project.name}
                   </h3>
-                  <p className="text-gray-600 mt-2 text-sm sm:text-base">
+                  <p className="text-gray-600 text-sm mb-5">
                     {project.description}
                   </p>
-                  <div className="mt-4">
-                    <a
-                      onClick={() => navigate(project.Link)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-blue-600 text-white text-sm px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300"
-                    >
-                      View Course
-                    </a>
-                  </div>
+                  <motion.button
+                    onClick={() => navigate(project.Link)}
+                    whileHover={{ scale: 1.1 }}
+                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-sm font-medium py-2 rounded-lg hover:from-blue-600 hover:to-indigo-600 transition-colors duration-300"
+                  >
+                    View Course
+                  </motion.button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

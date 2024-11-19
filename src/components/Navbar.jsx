@@ -108,12 +108,15 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const [log, setLog] = useState(true);
   const [l, setL] = useState("A");
 
   useEffect(() => {
     const logos = localStorage.getItem("logs");
+    const arnab = JSON.parse(logos);
+    setEmail(arnab);
     if (logos !== null) {
       const p = JSON.parse(logos);
       let k = p.slice(0, 1);
@@ -184,12 +187,7 @@ const Navbar = () => {
               >
                 Home
               </li>
-              <li
-                className="cursor-pointer hover:underline text-[#1F2937] dark:text-white"
-                onClick={() => navigate("/guardian")}
-              >
-                Guardian
-              </li>
+
               <li
                 className="cursor-pointer hover:underline text-[#1F2937] dark:text-white"
                 onClick={() => navigate("/teacher")}
@@ -201,12 +199,6 @@ const Navbar = () => {
                 onClick={() => navigate("/admin")}
               >
                 Admin
-              </li>
-              <li
-                className="cursor-pointer hover:underline text-[#1F2937] dark:text-white"
-                onClick={() => navigate("/management")}
-              >
-                Management
               </li>
             </ul>
             <div className="flex items-center space-x-4">
@@ -225,11 +217,14 @@ const Navbar = () => {
                   Student LogOut
                 </button>
               )}
-              <div
-                className="cursor-pointer rounded-full h-10 w-10 bg-purple-700 text-white flex items-center justify-center"
-                onClick={() => navigate("/studentdashbord")}
-              >
-                {l}
+              <div className="flex flex-col items-center justify-center">
+                <div
+                  className="cursor-pointer rounded-full h-10 w-10 bg-purple-700 text-white flex items-center justify-center"
+                  onClick={() => navigate("/studentdashbord")}
+                >
+                  {l}
+                </div>
+                <div className="text-white font-semibold"> {email}</div>
               </div>
             </div>
           </div>
