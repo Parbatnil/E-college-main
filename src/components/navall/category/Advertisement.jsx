@@ -14,9 +14,6 @@ const Advertisement = () => {
             Enroll in our programs today and take the first step toward building
             a brighter future. Explore courses designed for modern learners.
           </p>
-          <button className="bg-yellow-400 text-blue-900 py-3 px-6 rounded-full text-lg font-bold shadow-md hover:bg-yellow-500 transition duration-300">
-            Learn More
-          </button>
         </div>
 
         {/* Video Section */}
@@ -25,8 +22,6 @@ const Advertisement = () => {
             className="rounded-2xl shadow-lg w-full max-w-xl"
             autoPlay
             loop
-            muted
-            controls
           >
             <source src={adverticement} type="video/mp4" />
             Your browser does not support the video tag.
