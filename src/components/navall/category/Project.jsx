@@ -22,33 +22,38 @@ const Project = () => {
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.05, rotate: -1 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
-              className="bg-gradient-to-br from-blue-900 to-blue-700 flex flex-col items-center w-full max-w-md mx-auto p-6 rounded-3xl gap-y-6 shadow-lg transform transition-transform"
+              className="max-w-sm w-full bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-300 transform hover:-translate-y-3 hover:shadow-lg"
             >
-              <div className="w-full">
+              {/* Image Section */}
+              <div className="relative">
                 <img
+                  className="w-full h-48 object-cover"
                   src={project.image}
                   alt={project.name}
-                  className="w-full h-56 object-cover rounded-2xl shadow-md transition-transform duration-300 transform hover:scale-105"
                 />
+                <span className="absolute top-4 left-4 bg-blue-500 text-white text-xs uppercase font-bold py-1 px-3 rounded-full shadow-md">
+                  {`Unlock Your Future with ${project.name}`}
+                </span>
               </div>
-              <span className="bg-yellow-300 text-center text-blue-800 font-semibold rounded-full px-6 py-2">
-                {`Unlock Your Future with ${project.name}`}
-              </span>
-              <h3 className="text-2xl text-white font-extrabold text-center leading-tight">
-                {project.name}
-              </h3>
-              <p className="text-yellow-100 text-center px-4">
-                {project.description}
-              </p>
-              <motion.button
-                onClick={() => navigate(project.Link)}
-                whileHover={{ scale: 1.1 }}
-                className="bg-white text-blue-900 py-3 px-8 rounded-full text-lg font-semibold shadow-md hover:bg-yellow-100 transition-colors"
-              >
-                View Course
-              </motion.button>
+
+              {/* Content Section */}
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                  {project.name}
+                </h3>
+                <p className="text-gray-600 text-sm mb-5">
+                  {project.description}
+                </p>
+                <motion.button
+                  onClick={() => navigate(project.Link)}
+                  whileHover={{ scale: 1.1 }}
+                  className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-sm font-medium py-2 rounded-lg hover:from-blue-600 hover:to-indigo-600 transition-colors duration-300"
+                >
+                  View Course
+                </motion.button>
+              </div>
             </motion.div>
           ))}
         </div>

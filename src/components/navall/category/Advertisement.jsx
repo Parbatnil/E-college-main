@@ -1,54 +1,38 @@
 import React from "react";
-import ad1 from "../../../assets/ad1.mp4";
-import { motion } from "framer-motion";
-
+import adverticement from "../../../../src/assets/ad1.mp4";
 const Advertisement = () => {
   return (
-    <div className="relative m-5 bg-gradient-to-r from-blue-500 to-green-400 text-white py-10 px-5 lg:py-16 lg:px-20 rounded-lg shadow-lg overflow-hidden">
-      {/* Video Background */}
-      <video
-        src={ad1}
-        autoPlay
-        loop
-        muted
-        className="absolute inset-0 w-full h-full object-cover opacity-70 rounded-lg"
-      />
-
-      {/* Overlay Content */}
-      <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+    <section className="bg-gradient-to-r from-blue-900 to-blue-600 text-white py-12 px-6 md:px-16">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
         {/* Text Section */}
-        <div className="lg:w-1/2 text-center lg:text-left">
-          <motion.h1
-            className="text-3xl lg:text-5xl font-bold"
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.7 }}
-          >
-            Welcome to eCollege
-          </motion.h1>
-          <motion.p
-            className="mt-4 text-lg lg:text-xl"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9 }}
-          >
-            Join the leading platform for online education. Learn from the best,
-            anywhere, anytime!
-          </motion.p>
-          <motion.button
-            className="mt-6 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-4 rounded-lg shadow-md transform hover:scale-105 transition-all"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.2 }}
-          >
-            Explore Courses
-          </motion.button>
+        <div className="mb-8 md:mb-0 md:w-1/2 text-center md:text-left">
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
+            Unlock Endless Possibilities!
+          </h2>
+          <p className="text-lg md:text-xl mb-6">
+            Enroll in our programs today and take the first step toward building
+            a brighter future. Explore courses designed for modern learners.
+          </p>
+          <button className="bg-yellow-400 text-blue-900 py-3 px-6 rounded-full text-lg font-bold shadow-md hover:bg-yellow-500 transition duration-300">
+            Learn More
+          </button>
+        </div>
+
+        {/* Video Section */}
+        <div className="md:w-1/2 flex justify-center">
+          <iframe
+            className="rounded-2xl shadow-lg"
+            width="560"
+            height="315"
+            src={adverticement}
+            title="Advertisement Video"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
       </div>
-
-      {/* Overlay for darkening the video background */}
-      <div className="absolute inset-0 bg-black opacity-25 rounded-lg"></div>
-    </div>
+    </section>
   );
 };
 
