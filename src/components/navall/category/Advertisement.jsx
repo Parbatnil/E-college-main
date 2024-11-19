@@ -1,9 +1,10 @@
 import React from "react";
 import adverticement from "../../../../src/assets/ad1.mp4";
+
 const Advertisement = () => {
   return (
     <section className="bg-gradient-to-r from-blue-900 to-blue-600 text-white py-12 px-6 md:px-16">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
+      <div className="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between">
         {/* Text Section */}
         <div className="mb-8 md:mb-0 md:w-1/2 text-center md:text-left">
           <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
@@ -20,16 +21,16 @@ const Advertisement = () => {
 
         {/* Video Section */}
         <div className="md:w-1/2 flex justify-center">
-          <iframe
-            className="rounded-2xl shadow-lg"
-            width="560"
-            height="315"
-            src={adverticement}
-            title="Advertisement Video"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <video
+            className="rounded-2xl shadow-lg w-full max-w-xl"
+            autoPlay
+            loop
+            muted
+            controls
+          >
+            <source src={adverticement} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </section>

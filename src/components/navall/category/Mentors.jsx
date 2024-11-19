@@ -1,66 +1,61 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { mentors } from "../../../assets/Assets";
-import AOS from "aos";
-import "aos/dist/aos.css"; // Import AOS styles
+import { motion } from "framer-motion"; // For animations
 
 const Mentors = () => {
-  // Initialize AOS for scroll-based animations
-  useEffect(() => {
-    AOS.init();
-  }, []);
-
   return (
-    <div className="bg-white py-16">
-      <div className="flex justify-center items-center pt-10">
-        <h1 className="mb-8 text-center text-3xl lg:text-4xl font-bold text-[#1E3A8A]">
-          Meet Our Mentors
+    <div className="pt-10 bg-gray-50 my-10">
+      {/* Title */}
+      <div className="flex justify-center items-center mb-8">
+        <h1 className="text-center text-3xl sm:text-4xl font-extrabold text-gray-800">
+          Mentors
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-8 lg:px-16">
-        {mentors.map((items) => (
-          <div
-            key={items.id}
-            className="relative flex justify-center items-center bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
-            data-aos="fade-up"
-            data-aos-duration="1000"
+      {/* Mentors List */}
+      <div className="flex flex-wrap justify-center items-center gap-6 px-4">
+        {mentors.map((mentor) => (
+          <motion.div
+            key={mentor.id}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="w-full sm:w-[90%] md:w-[90%] lg:w-[90%] xl:w-[90%] rounded-3xl bg-white shadow-lg overflow-hidden"
           >
-            <div className="w-full h-full flex flex-col sm:flex-row items-center p-6">
+            <div className="flex flex-col sm:flex-row items-center">
               {/* Mentor Image */}
-              <div className="flex justify-center items-center mb-4 sm:mb-0">
-                <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 rounded-full border-4 border-[#1E3A8A] overflow-hidden shadow-md">
-                  <img
-                    src={items.image}
-                    alt={items.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+              <img
+                src={mentor.image}
+                alt={mentor.name}
+                className="w-24 h-24 sm:w-32 sm:h-32 lg:w-32 lg:h-32 object-cover rounded-full mx-4 mt-4 sm:mt-0 shadow-md"
+              />
 
-              {/* Mentor Details */}
-              <div className="text-center sm:text-left sm:ml-6">
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-[#1E3A8A]">
-                  {items.name}
+              {/* Mentor Info */}
+              <div className="flex flex-col flex-grow gap-4 p-4 sm:pl-6 sm:pr-10 text-center sm:text-left">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-700">
+                  {mentor.name}
                 </h3>
-                <p className="mt-2 text-sm sm:text-lg lg:text-xl text-gray-600">
-                  {items.title}
+                <p className="text-md sm:text-lg text-gray-500">
+                  {mentor.title}
                 </p>
-                <p className="mt-4 text-xs sm:text-sm text-gray-500 lg:text-base">
-                  {items.description}
+                <p className="text-sm sm:text-base text-gray-600">
+                  {mentor.description.slice(0, 100)}...
                 </p>
 
-                {/* Message Button */}
-                <div className="flex justify-center sm:justify-start mt-6">
-                  <a
-                    href="mailto:ecollege2024@gmail.com"
-                    className="inline-block text-center bg-[#1E3A8A] text-white py-2 px-6 rounded-full text-sm sm:text-base hover:bg-blue-600 transition-colors duration-300"
+                {/* Buttons */}
+                <div className="mt-4 flex justify-center sm:justify-start">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="bg-orange-500 text-white px-6 py-2 rounded-full shadow-lg hover:bg-orange-600 transition-all"
                   >
-                    Message
-                  </a>
+                    <a href="mailto:ecollege2024@gmail.com">Message</a>
+                  </motion.button>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
