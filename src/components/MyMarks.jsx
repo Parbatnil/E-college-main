@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import HashLoader from "react-spinners/HashLoader";
-
+import { motion } from "framer-motion";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 const MyMarks = () => {
   const [student, setStudent] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const logos = localStorage.getItem("logs");
@@ -107,9 +110,45 @@ const MyMarks = () => {
               ))}
             </tbody>
           </table>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5 }}
+            className="flex justify-center mt-8"
+            onClick={() => navigate("/studentdashbord")}
+          >
+            <a
+              href="#"
+              className="px-8 py-4 bg-blue-800 text-yellow-500 rounded-lg font-semibold text-xl transition-all duration-300 transform hover:scale-105 hover:bg-yellow-400  hover:text-blue-500 flex items-center"
+            >
+              <FaArrowLeft className="ml-2 text-xl" />
+              Back to Dashboard
+            </a>
+          </motion.div>
         </div>
       ) : (
-        <div className="text-center text-gray-500 mt-5">No data available.</div>
+        <div className="text-center text-red-500 mt-5 ">
+          No data available
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5 }}
+              className="flex justify-center mt-8"
+              onClick={() => navigate("/studentdashbord")}
+            >
+              <a
+                href="#"
+                className="px-8 py-4 bg-blue-800 text-yellow-500 rounded-lg font-semibold text-xl transition-all duration-300 transform hover:scale-105 hover:bg-yellow-400 hover:text-blue-500 flex items-center"
+              >
+                <FaArrowLeft className="ml-2 text-xl" />
+                Back to Dashboard
+              </a>
+            </motion.div>
+          </div>
+        </div>
+
+        //----//
       )}
     </div>
   );

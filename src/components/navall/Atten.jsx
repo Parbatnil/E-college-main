@@ -139,7 +139,7 @@ const Atten = () => {
             >
               <a
                 href="#"
-                className="px-8 py-4 bg-blue-800 text-yellow-500 rounded-lg font-semibold text-xl transition-all duration-300 transform hover:scale-105 hover:bg-yellow-400 flex items-center"
+                className="px-8 py-4 bg-blue-800 text-yellow-500 rounded-lg font-semibold text-xl transition-all duration-300 transform hover:scale-105 hover:bg-yellow-400 hover:text-blue-500 flex items-center"
               >
                 <FaArrowLeft className="ml-2 text-xl" />
                 Back to Dashboard

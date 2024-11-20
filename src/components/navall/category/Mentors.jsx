@@ -1,14 +1,17 @@
 import React from "react";
 import { mentors } from "../../../assets/Assets";
 import { motion } from "framer-motion"; // For animations
+import { TiTick } from "react-icons/ti";
+import { BsPersonWorkspace } from "react-icons/bs";
 
 const Mentors = () => {
   return (
     <div className="pt-10 bg-gray-50 my-10">
       {/* Title */}
       <div className="flex justify-center items-center mb-8">
-        <h1 className="text-center text-3xl sm:text-4xl font-extrabold text-gray-800">
+        <h1 className="text-center text-3xl sm:text-4xl font-extrabold text-gray-800 flex">
           Mentors
+          <BsPersonWorkspace className="ml-6 text-blue-500" />
         </h1>
       </div>
 
@@ -33,8 +36,12 @@ const Mentors = () => {
 
               {/* Mentor Info */}
               <div className="flex flex-col flex-grow gap-4 p-4 sm:pl-6 sm:pr-10 text-center sm:text-left">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-700">
-                  {mentor.name}
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-700 flex space-x-2">
+                  <span>{mentor.name}</span>{" "}
+                  <span>
+                    {" "}
+                    <TiTick className=" font-medium text-blue-700" />
+                  </span>
                 </h3>
                 <p className="text-md sm:text-lg text-gray-500">
                   {mentor.title}
