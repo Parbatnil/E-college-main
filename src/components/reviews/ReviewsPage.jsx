@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import review1 from "../../../public/review1.jpeg";
 import review2 from "../../../public/review2.jpeg";
 import review3 from "../../../public/review3.jpeg";
+import { FaCircleUser } from "react-icons/fa6";
 
 const reviews = [
   {
@@ -32,12 +33,13 @@ const ReviewsPage = () => {
   return (
     <div className=" bg-gradient-to-r from-blue-100 to-indigo-200 py-10 px-4 sm:px-8">
       <motion.h1
-        className="text-3xl font-bold text-center mb-8 text-indigo-700"
+        className="text-3xl font-bold text-center mb-8 text-indigo-700 flex justify-center items-center "
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         User Reviews
+        <FaCircleUser />
       </motion.h1>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {reviews.map((review) => (
