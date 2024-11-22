@@ -13,6 +13,7 @@ const Bcaclass = () => {
   const [roll, setRoll] = useState("");
   const [time, setTime] = useState(new Date());
   const [fixt, setFixt] = useState(time.toLocaleString().slice(0, 10));
+  const [checkTime,setCheckTime]=useState( new Date().toLocaleTimeString().slice(0,2));
   const [refresh, setRefresh] = useState(false); // New state for auto-refresh
 
   useEffect(() => {
@@ -74,14 +75,17 @@ const Bcaclass = () => {
     }
   }, [roll, fixt, refresh]); // Add refresh as a dependency
 
-  const attend = (a, b, c) => {
+  const attend = (a, b, c,d) => {
     const isEmailExist = students.some((student) => student.paper === b);
 
-    if (isEmailExist) {
+    let teacherTime=d.slice(0,2);
+    if (teacherTime===checkTime)
+    {if (isEmailExist) {
       console.log("have");
       window.open(c);
-    } else {
-      axios
+    } else 
+      
+      {axios
         .post("https://courseapi-3kus.onrender.com/api/atten", {
           sub: "bcaLIVE",
           teacher: a.slice(2, 7),
@@ -95,8 +99,8 @@ const Bcaclass = () => {
           setRefresh(!refresh); // Toggle refresh to trigger re-render
         })
         .catch((err) => console.log(err));
-      window.open(c);
-    }
+      window.open(c);}}
+  
   };
 
   const today = new Date();
@@ -152,7 +156,7 @@ const Bcaclass = () => {
                               <td
                                 className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-red-500 cursor-pointer"
                                 onClick={() =>
-                                  attend(d.teacher, d.subtitle, d.link)
+                                  attend(d.teacher, d.subtitle, d.link,d.time)
                                 }
                               >
                                 live{d.time}
