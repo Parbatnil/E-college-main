@@ -15,6 +15,7 @@ const Mca = () => {
   const [columns, setColumns] = useState([]);
   const [time, setTime] = useState(new Date().toLocaleString().slice(0, 10));
   const [fixt, setFixt] = useState("");
+  const [checkRoll,setCheckRoll]=useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,6 +30,8 @@ const Mca = () => {
           `https://courseapi-3kus.onrender.com/api/students?email=${p}`
         );
         const student = studentRes.data.students.find((e) => e.mca);
+        const hasroll = studentRes.data.students.find((e) => e.roll);
+        setCheckRoll(hasroll)
         setLock(student ? student.mca : false);
       } catch (err) {
         setErrorMessage("Failed to fetch data. Please try again.");
@@ -257,13 +260,13 @@ const Mca = () => {
                         <p className="p-4">{answer}</p>
                       </div>
                     )}
-                    {!lock && (
-                      <button
+                  {!lock && (!checkRoll&&
+                      (<button
                         className="bg-primary text-white bg-orange-500 cursor-pointer hover:scale-105 duration-300 py-2 px-8 rounded-full"
                         onClick={handelChange}
                       >
                         BUY Rs.3000
-                      </button>
+                      </button>)
                       // <Payment/>
                     )}
                     {errorMessage && (
