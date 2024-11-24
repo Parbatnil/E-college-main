@@ -46,7 +46,7 @@ const Mcateacherexam = () => {
   useEffect(()=>{
     const tname = localStorage.getItem('teachername');
     const p = tname.slice(2, 8);
-    setTrack(p)
+    setTrack(tname)
     axios.get('https://courseapi-3kus.onrender.com/api/courseexam?sub=mca')
     .then(res => {
         // console.log(res.data.Courseexam)
@@ -61,7 +61,7 @@ const Mcateacherexam = () => {
     console.log("hello")
     const tname = localStorage.getItem('teachername');
     const p = tname.slice(2, 8);
-    axios.post('https://courseapi-3kus.onrender.com/api/courseexam-student',{"sub":"mca","teacher":p,"paper":papers,"des":question,"question":video,"option1":option1,"option2":option2,"option3":option3,"option4":option4,"ans":ans,"examnumber":examcount1})
+    axios.post('https://courseapi-3kus.onrender.com/api/courseexam-student',{"sub":"mca","teacher":tname,"paper":papers,"des":question,"question":video,"option1":option1,"option2":option2,"option3":option3,"option4":option4,"ans":ans,"examnumber":examcount1})
     .then(res=>alert("Data is Added successfully"))
       .catch(err=>console.log(err))
   }
@@ -88,6 +88,20 @@ const Mcateacherexam = () => {
       .catch(err=> console.log(err))
     }
   }
+
+  useEffect(()=>{
+    const tname = localStorage.getItem('teachername');
+    const p = tname.slice(2, 8);
+    setTrack(tname)
+    axios.get('https://courseapi-3kus.onrender.com/api/courseexam?sub=mca')
+    .then(res => {
+        // console.log(res.data.Courseexam)
+      setColumns(Object.keys(res.data.Courseexam))
+      setRecords(res.data.Courseexam)
+    })
+    .catch(err=>console.log(err))
+  },[submit,handelPublish,handelDelete])
+
   const [video, setVideo] = useState("");
   const[link,setLink]=useState("");
   const [ak, setAk] = useState(MCA[0]['papers'][0]['videos']);

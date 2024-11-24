@@ -33,8 +33,8 @@ const Jeca = () => {
         const studentRes = await axios.get(
           `https://courseapi-3kus.onrender.com/api/students?email=${p}`
         );
-        const student = studentRes.data.students.find((e) => e.wbjeca);
-        setLock(student ? student.wbjeca : false);
+        const student = studentRes.data.students.find((e) => e.jeca);
+        setLock(student ? student.jeca : false);
       } catch (err) {
         setErrorMessage("Failed to fetch data. Please try again.");
         console.error(err);
@@ -113,13 +113,13 @@ const Jeca = () => {
       const logp = localStorage.getItem("logs");
       const p = JSON.parse(logp);
       let change = parseInt(time.slice(6, 10));
-      let changenew = change + 2;
+      let changenew = change + 1;
       let enddate = changenew.toString();
       let fast = time.slice(0, 6);
       let result = fast.concat(enddate);
-      await axios.put(`https://courseapi-3kus.onrender.com/api/student/${p}`, {
-        wbjeca: true,
-        course: "JECA",
+      await axios.put(`https://courseapi-3kus.onrender.com/api/studentseroll/${p}`, {
+        jeca: true,
+        ecourse: "JECA",
         starting: time,
         end: result,
       });

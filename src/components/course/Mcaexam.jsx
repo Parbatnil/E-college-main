@@ -123,7 +123,7 @@ const Mcaexam = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="flex justify-center">
         <div className="mt-2 font-bold text-[30px]">MCA Exam</div>
       </div>

@@ -92,7 +92,7 @@ const StudentAniDash = () => {
               transition={{ duration: 1.5 }}
               className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-white"
             >
-              Welcome to the Future of Education!
+              Welcome to E-College Student Dashboard!
             </motion.h1>
 
             {/* Description Section with Animation */}
@@ -122,10 +122,10 @@ const StudentAniDash = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-3">
-                  Student Dashboard
+                  Student Profile
                 </h3>
                 <p className="text-gray-600">
-                  Open Your Student DashBoard to check your Details
+                  Open Your Student Profile to check your Details
                 </p>
               </motion.div>
 

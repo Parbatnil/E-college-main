@@ -97,8 +97,18 @@ const StudentProfile = () => {
               <p className="text-gray-600">{student.roll}</p>
             </div>
             <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:bg-indigo-50 transition-all duration-300">
+              <h3 className="text-xl font-semibold text-gray-800">
+               Exam Roll Number
+              </h3>
+              <p className="text-gray-600">{student.eroll}</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:bg-indigo-50 transition-all duration-300">
               <h3 className="text-xl font-semibold text-gray-800">Course</h3>
               <p className="text-gray-600">{student.course}</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:bg-indigo-50 transition-all duration-300">
+              <h3 className="text-xl font-semibold text-gray-800">Exam-Course</h3>
+              <p className="text-gray-600">{student.ecourse}</p>
             </div>
           </div>
 

@@ -108,7 +108,7 @@ const Bca = () => {
       const logp = localStorage.getItem("logs");
       const p = JSON.parse(logp);
       let change = parseInt(time.slice(6, 10));
-      let changenew = change + 2;
+      let changenew = change + 3;
       let enddate = changenew.toString();
       let fast = time.slice(0, 6);
       let result = fast.concat(enddate);
