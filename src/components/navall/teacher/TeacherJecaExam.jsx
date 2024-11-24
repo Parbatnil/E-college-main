@@ -44,7 +44,7 @@ const TeacherJecaExam = () => {
   useEffect(() => {
     const tname = localStorage.getItem("teachername");
     const p = tname.slice(2, 8);
-    setTrack(p);
+    setTrack(tname);
     axios
       .get("https://courseapi-3kus.onrender.com/api/courseexam?sub=jeca")
       .then((res) => {
@@ -63,7 +63,7 @@ const TeacherJecaExam = () => {
     axios
       .post("https://courseapi-3kus.onrender.com/api/courseexam-student", {
         sub: "jeca",
-        teacher: p,
+        teacher:tname,
         paper: papers,
         des: question,
         question: video,
@@ -104,6 +104,21 @@ const TeacherJecaExam = () => {
         .catch((err) => console.log(err));
     }
   };
+
+  useEffect(() => {
+    const tname = localStorage.getItem("teachername");
+    const p = tname.slice(2, 8);
+    setTrack(tname);
+    axios
+      .get("https://courseapi-3kus.onrender.com/api/courseexam?sub=jeca")
+      .then((res) => {
+        // console.log(res.data.Courseexam)
+        setColumns(Object.keys(res.data.Courseexam));
+        setRecords(res.data.Courseexam);
+      })
+      .catch((err) => console.log(err));
+  }, [submit,handelPublish,handelDelete]);
+
   const [video, setVideo] = useState("");
   const [link, setLink] = useState("");
   const [ak, setAk] = useState(MCA[0]["papers"][0]["videos"]);

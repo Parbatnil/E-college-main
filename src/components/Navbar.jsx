@@ -131,6 +131,8 @@ const Navbar = () => {
 
   const update = () => {
     localStorage.removeItem("logs");
+    
+    localStorage.removeItem("studentid");
     setLog(true);
   };
 

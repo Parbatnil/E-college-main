@@ -190,6 +190,12 @@ const StudentsData = () => {
                   <th className="py-2 px-4 border-b border-gray-500">
                     Roll Number
                   </th>
+                  <th className="py-2 px-4 border-b border-gray-500">
+                    Exam-Roll Number
+                  </th>
+                  <th className="py-2 px-4 border-b border-gray-500">
+                    Exam-Course
+                  </th>
                   <th className="py-2 px-4 border-b border-gray-500">Course</th>
                   <th className="py-2 px-4 border-b border-gray-500">
                     Start Date
@@ -214,6 +220,12 @@ const StudentsData = () => {
                     </td>
                     <td className="py-2 px-4 border-b border-gray-500">
                       {student.roll}
+                    </td>
+                    <td className="py-2 px-4 border-b border-gray-500">
+                      {student.eroll}
+                    </td>
+                    <td className="py-2 px-4 border-b border-gray-500">
+                      {student.ecourse}
                     </td>
                     <td className="py-2 px-4 border-b border-gray-500">
                       {student.course}

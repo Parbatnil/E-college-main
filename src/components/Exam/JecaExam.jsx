@@ -85,7 +85,7 @@ const JecaExam = () => {
         teacher: question.teacher,
         paper: question.paper,
         student: student.name,
-        roll: student.roll,
+        roll: student.eroll,
         examno: question.examnumber,
         score: score,
         email: student.email,
@@ -123,7 +123,7 @@ const JecaExam = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="flex justify-center">
         <div className="mt-2 font-bold text-[30px]">JECA Exam</div>
       </div>
