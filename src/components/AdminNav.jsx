@@ -62,12 +62,7 @@ const AdminNav = () => {
           >
             Home
           </div>
-          <div
-            className="hover:text-white cursor-pointer"
-            onClick={() => navigate("/guidance")}
-          >
-            Guidance
-          </div>
+
           <div
             className="hover:text-white cursor-pointer"
             onClick={() => navigate("/teacher")}
@@ -137,12 +132,7 @@ const AdminNav = () => {
             >
               Home
             </li>
-            <li
-              className="hover:text-white cursor-pointer"
-              onClick={() => navigate("/guidance")}
-            >
-              Guidance
-            </li>
+
             <li
               className="hover:text-white cursor-pointer"
               onClick={() => navigate("/teacher")}

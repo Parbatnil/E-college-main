@@ -61,7 +61,7 @@ const TeacherNav = () => {
   return (
     <div>
       {/* Desktop Menu */}
-      <nav className="lg:flex hidden justify-between items-center w-full h-16 text-white border-gray-200 dark:bg-[#1E3A8A]">
+      <nav className="lg:flex hidden justify-between items-center w-full h-16 text-white border-gray-200 bg-[#1E3A8A]">
         {/* Logo */}
         <div className="flex justify-center items-center gap-3">
           <img
@@ -126,7 +126,7 @@ const TeacherNav = () => {
       </nav>
 
       {/* Mobile Menu */}
-      <div className="lg:hidden text-white border-gray-200 dark:bg-[#1E3A8A]">
+      <div className="lg:hidden text-white border-gray-200 bg-[#1E3A8A]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* Toggle Mobile Menu */}

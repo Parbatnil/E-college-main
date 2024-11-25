@@ -6,6 +6,7 @@ import { bcaPaper } from "../../../assets/mcadata";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import TeacherNav from "../../TeacherNav";
+import { MdDeleteForever } from "react-icons/md";
 const Bcateacher = () => {
   const [papers, setPapers] = useState("");
   const navigate = useNavigate();
@@ -99,12 +100,12 @@ const Bcateacher = () => {
                       <div>
                         <h3>SELECT PAPER</h3>
                         <select
-                          className="border-2 border-gray-400 p-2 rounded-md w-80"
+                          className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                           value={papers}
                           onChange={changePaper}
                           required
                         >
-                          <option></option>
+                          <option>--Select a Paper--</option>
                           {bcaPaper.map((paper) => (
                             <option value={paper.subtitle} key={paper.name}>
                               {paper.subtitle}
@@ -117,7 +118,7 @@ const Bcateacher = () => {
                         type="text"
                         name="video"
                         id="video"
-                        className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                        className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                         placeholder="Eg.- Basic python"
                         value={video}
                         onChange={(e) => setVideo(e.target.value)}
@@ -129,7 +130,7 @@ const Bcateacher = () => {
                         type="text"
                         name="link"
                         id="link"
-                        className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                        className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                         placeholder="Eg.- https://www.google.com"
                         value={link}
                         onChange={(e) => setLink(e.target.value)}
@@ -179,14 +180,14 @@ const Bcateacher = () => {
                                   </td>
                                   {track === d.teacher ? (
                                     <td
-                                      className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-yellow-200 cursor-pointer"
+                                      className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-yellow-200 cursor-pointer text-red-500"
                                       onClick={(e) => handelDelete(d._id)}
                                     >
-                                      Del
+                                      <MdDeleteForever />
                                     </td>
                                   ) : (
-                                    <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-800 cursor-pointer">
-                                      Del
+                                    <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-800 cursor-pointer text-red-500">
+                                      <MdDeleteForever />
                                     </td>
                                   )}
                                 </tr>

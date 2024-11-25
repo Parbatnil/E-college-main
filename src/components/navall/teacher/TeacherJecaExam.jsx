@@ -63,7 +63,7 @@ const TeacherJecaExam = () => {
     axios
       .post("https://courseapi-3kus.onrender.com/api/courseexam-student", {
         sub: "jeca",
-        teacher:tname,
+        teacher: tname,
         paper: papers,
         des: question,
         question: video,
@@ -117,7 +117,7 @@ const TeacherJecaExam = () => {
         setRecords(res.data.Courseexam);
       })
       .catch((err) => console.log(err));
-  }, [submit,handelPublish,handelDelete]);
+  }, [submit, handelPublish, handelDelete]);
 
   const [video, setVideo] = useState("");
   const [link, setLink] = useState("");
@@ -140,12 +140,12 @@ const TeacherJecaExam = () => {
                   <div>
                     <h3>SELECT PAPER **</h3>
                     <select
-                      className="border-2 border-gray-400 p-2 rounded-md w-80"
+                      className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                       value={papers}
                       onChange={changePaper}
                       required
                     >
-                      <option></option>
+                      <option>--Select Paper--</option>
                       {WbjecaSub.map((paper) => (
                         <option value={paper.title} key={paper.name}>
                           {paper.title}
@@ -157,12 +157,12 @@ const TeacherJecaExam = () => {
                   <div>
                     <h3>SELECT EXAM NUMBER **</h3>
                     <select
-                      className="border-2 border-gray-400 p-2 rounded-md w-80"
+                      className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                       value={examcount1}
                       onChange={changeExam}
                       required
                     >
-                      <option></option>
+                      <option> --Exam No--</option>
                       {examcount.map((paper) => (
                         <option value={paper.exam} key={paper.exam}>
                           {paper.exam}
@@ -176,7 +176,7 @@ const TeacherJecaExam = () => {
                     type="text"
                     name="question"
                     id="question"
-                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                     placeholder="Question"
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
@@ -186,7 +186,7 @@ const TeacherJecaExam = () => {
                     type="text"
                     name="question"
                     id="question"
-                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                     placeholder="Question"
                     value={video}
                     onChange={(e) => setVideo(e.target.value)}
@@ -198,7 +198,7 @@ const TeacherJecaExam = () => {
                     type="text"
                     name="text"
                     id="text"
-                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                     placeholder="option1"
                     value={option1}
                     onChange={(e) => setOption1(e.target.value)}
@@ -209,7 +209,7 @@ const TeacherJecaExam = () => {
                     type="text"
                     name="text"
                     id="text"
-                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                     placeholder="option2"
                     value={option2}
                     onChange={(e) => setOption2(e.target.value)}
@@ -220,7 +220,7 @@ const TeacherJecaExam = () => {
                     type="text"
                     name="text"
                     id="text"
-                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                     placeholder="option3"
                     value={option3}
                     onChange={(e) => setOption3(e.target.value)}
@@ -230,7 +230,7 @@ const TeacherJecaExam = () => {
                     type="text"
                     name="text"
                     id="text"
-                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                     placeholder="option4"
                     value={option4}
                     onChange={(e) => setOption4(e.target.value)}
@@ -239,12 +239,12 @@ const TeacherJecaExam = () => {
                   <div>
                     <h3>SELECT ANSWER **</h3>
                     <select
-                      className="border-2 border-gray-400 p-2 rounded-md w-80"
+                      className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                       value={ans}
                       onChange={changeans}
                       required
                     >
-                      <option></option>
+                      <option> --Correct Option--</option>
                       {answerop.map((paper) => (
                         <option value={paper.ans} key={paper.ans}>
                           {paper.ans}
@@ -269,12 +269,12 @@ const TeacherJecaExam = () => {
                 <div>
                   <h3>SELECT PAPER</h3>
                   <select
-                    className="border-2 border-gray-400 p-1 rounded-md w-24"
+                    className="border-2 border-gray-400 p-1 rounded-md w-24 bg-blue-200"
                     value={newpaper}
                     onChange={changePapers}
                     required
                   >
-                    <option></option>
+                    <option>--Paper--</option>
                     {WbjecaSub.map((paper) => (
                       <option value={paper.title} key={paper.name}>
                         {paper.title}
@@ -285,7 +285,7 @@ const TeacherJecaExam = () => {
                 <div>
                   <h3>SELECT EXAM NUMBER</h3>
                   <select
-                    className="border-2 border-gray-400 p-1 rounded-md w-40"
+                    className="border-2 border-gray-400 p-1 rounded-md w-40 bg-blue-200"
                     value={examcouunt2}
                     onChange={changeExams}
                     required
@@ -321,17 +321,17 @@ const TeacherJecaExam = () => {
                           )
                           .map((d, i) => (
                             <tr key={i}>
-                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-blue-200">
                                 {d.paper}
                               </td>
 
-                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-blue-200">
                                 {d.examnumber}
                               </td>
-                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-blue-200">
                                 {d.question}
                               </td>
-                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-300">
+                              <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-blue-200">
                                 {d.teacher}
                               </td>
                               {d.status ? (

@@ -4,8 +4,26 @@ import Navbar from "../../Navbar";
 import axios from "axios";
 import { bcaPaper } from "../../../assets/mcadata";
 import TeacherNav from "../../TeacherNav";
+import { MdDeleteForever } from "react-icons/md";
 
-const timeBlock = ['9:30 am', '10:00 am', '10:30 am', '11:00 am', '11:30 am', '12:00 pm', '12:30 pm','1:00 pm','1:30 pm','2:00 pm','2:30 pm','3:00 pm','3:30 pm','4:00 pm','4:30 pm','5:00 pm'];
+const timeBlock = [
+  "9:30 am",
+  "10:00 am",
+  "10:30 am",
+  "11:00 am",
+  "11:30 am",
+  "12:00 pm",
+  "12:30 pm",
+  "1:00 pm",
+  "1:30 pm",
+  "2:00 pm",
+  "2:30 pm",
+  "3:00 pm",
+  "3:30 pm",
+  "4:00 pm",
+  "4:30 pm",
+  "5:00 pm",
+];
 
 const Bcalive = () => {
   const [papers, setPapers] = useState("");
@@ -25,12 +43,12 @@ const Bcalive = () => {
 
   useEffect(() => {
     const updateTime = () => {
-      const indiaTime = new Intl.DateTimeFormat('en-IN', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
+      const indiaTime = new Intl.DateTimeFormat("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
         hour12: true,
-        timeZone: 'Asia/Kolkata'
+        timeZone: "Asia/Kolkata",
       }).format(new Date());
 
       setTime(indiaTime);
@@ -48,12 +66,21 @@ const Bcalive = () => {
 
     // Parse the selected time and current time
     const currentTime = new Date();
-    const [currentHours, currentMinutes] = [currentTime.getHours(), currentTime.getMinutes()];
-    const formattedCurrentTime = `${currentHours % 12 || 12}:${currentMinutes < 10 ? `0${currentMinutes}` : currentMinutes} ${currentHours >= 12 ? 'pm' : 'am'}`;
+    const [currentHours, currentMinutes] = [
+      currentTime.getHours(),
+      currentTime.getMinutes(),
+    ];
+    const formattedCurrentTime = `${currentHours % 12 || 12}:${
+      currentMinutes < 10 ? `0${currentMinutes}` : currentMinutes
+    } ${currentHours >= 12 ? "pm" : "am"}`;
 
     // Convert both times to Date objects for comparison
-    const selectedDate = new Date(`1970-01-01T${convertTo24HourFormat(selectedTime)}`);
-    const currentDate = new Date(`1970-01-01T${convertTo24HourFormat(formattedCurrentTime)}`);
+    const selectedDate = new Date(
+      `1970-01-01T${convertTo24HourFormat(selectedTime)}`
+    );
+    const currentDate = new Date(
+      `1970-01-01T${convertTo24HourFormat(formattedCurrentTime)}`
+    );
 
     if (selectedDate > currentDate) {
       setError(""); // No error if the selected time is in the future
@@ -63,16 +90,18 @@ const Bcalive = () => {
   };
 
   const convertTo24HourFormat = (time12h) => {
-    const [time, modifier] = time12h.split(' ');
-    let [hours, minutes] = time.split(':').map(Number);
+    const [time, modifier] = time12h.split(" ");
+    let [hours, minutes] = time.split(":").map(Number);
 
-    if (modifier === 'pm' && hours !== 12) {
+    if (modifier === "pm" && hours !== 12) {
       hours += 12;
-    } else if (modifier === 'am' && hours === 12) {
+    } else if (modifier === "am" && hours === 12) {
       hours = 0;
     }
 
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00`;
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:00`;
   };
 
   useEffect(() => {
@@ -93,40 +122,41 @@ const Bcalive = () => {
     e.preventDefault();
     const today = new Date();
     const tname = localStorage.getItem("teachername");
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-const day = String(today.getDate()).padStart(2, '0');
-const year = String(today.getFullYear()).slice(-2); // Get the last two digits of the year
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+    const day = String(today.getDate()).padStart(2, "0");
+    const year = String(today.getFullYear()).slice(-2); // Get the last two digits of the year
 
-// Combine into MM/DD/YY format
-const formattedDate = `${month}/${day}/${year}`;
+    // Combine into MM/DD/YY format
+    const formattedDate = `${month}/${day}/${year}`;
 
-// console.log(formattedDate); 
-    if (!error)
-{    axios
-      .post("https://courseapi-3kus.onrender.com/api/products", {
-        name: video,
-        link: link,
-        subtitle: papers,
-        sub: "bcaLIVE",
-        time: timeCheck,
-        teacher: tname,
-        date: formattedDate,
-      })
-      .then((res) => alert("Data is Added successfully"))
-      .catch((err) => console.log(err));}
-      else{
-        console.log("ok");
-      }
+    // console.log(formattedDate);
+    if (!error) {
+      axios
+        .post("https://courseapi-3kus.onrender.com/api/products", {
+          name: video,
+          link: link,
+          subtitle: papers,
+          sub: "bcaLIVE",
+          time: timeCheck,
+          teacher: tname,
+          date: formattedDate,
+        })
+        .then((res) => alert("Data is Added successfully"))
+        .catch((err) => console.log(err));
+    } else {
+      console.log("ok");
+    }
   };
   useEffect(() => {
-    axios.get('https://courseapi-3kus.onrender.com/api/products?sub=bcaLIVE')
-    .then(res => {
-      // console.log(res.data.mydata)
-      setColumns(Object.keys(res.data.mydata))
-      setRecords(res.data.mydata)
-    })
-    .catch(err=>console.log(err))
-  }, [submit])
+    axios
+      .get("https://courseapi-3kus.onrender.com/api/products?sub=bcaLIVE")
+      .then((res) => {
+        // console.log(res.data.mydata)
+        setColumns(Object.keys(res.data.mydata));
+        setRecords(res.data.mydata);
+      })
+      .catch((err) => console.log(err));
+  }, [submit]);
 
   const handelDelete = (_id) => {
     const confirm = window.confirm("Would you like to Delete?");
@@ -140,19 +170,18 @@ const formattedDate = `${month}/${day}/${year}`;
     }
   };
 
-// Get today's date in MM/DD/YY format
-const today = new Date();
-const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-const day = String(today.getDate()).padStart(2, '0');
-const year = String(today.getFullYear()).slice(-2); // Get last two digits of the year
-const todayDate = `${month}/${day}/${year}`;
+  // Get today's date in MM/DD/YY format
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+  const day = String(today.getDate()).padStart(2, "0");
+  const year = String(today.getFullYear()).slice(-2); // Get last two digits of the year
+  const todayDate = `${month}/${day}/${year}`;
 
-// Filter records to show only those whose date matches today's date
-const filteredRecords = records.filter((record) => {
-  const recordDate = record.date?.trim(); // Ensure no extra spaces
-  return recordDate === todayDate;
-});
-
+  // Filter records to show only those whose date matches today's date
+  const filteredRecords = records.filter((record) => {
+    const recordDate = record.date?.trim(); // Ensure no extra spaces
+    return recordDate === todayDate;
+  });
 
   return (
     <div>
@@ -166,18 +195,18 @@ const filteredRecords = records.filter((record) => {
           <div className="overflow-hidden rounded-3xl min-h-[550px] sm:min-h-[650px] hero-bg-color flex justify-center">
             <div className="container pb-8 sm:pb-0 mt-6">
               <div className="flex flex-col sm:flex-row md:flex-col items-center sm:items-center sm:justify-center sm:gap-10 w-full text-black">
-              <h1>{`Current Time ${time} `}</h1>
-                      
+                <h1>{`Current Time ${time} `}</h1>
+
                 <form onSubmit={submit}>
                   <div>
                     <h3>SELECT PAPER</h3>
                     <select
-                      className="border-2 border-gray-400 p-2 rounded-md w-80"
+                      className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                       value={papers}
                       onChange={(e) => setPapers(e.target.value)}
                       required
                     >
-                      <option></option>
+                      <option>--Select a paper--</option>
                       {bcaPaper.map((paper) => (
                         <option value={paper.subtitle} key={paper.name}>
                           {paper.subtitle}
@@ -190,7 +219,7 @@ const filteredRecords = records.filter((record) => {
                     type="text"
                     name="video"
                     id="video"
-                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                     placeholder="Eg.- Basic python"
                     value={video}
                     onChange={(e) => setVideo(e.target.value)}
@@ -198,26 +227,30 @@ const filteredRecords = records.filter((record) => {
                   />
 
                   <h3>Select a Time</h3>
-                    <select 
-                      className="border-2 border-gray-400 text-black p-2 rounded-md w-80 bg-slate-300"
-                      name="time" 
-                      value={timeCheck} 
-                      onChange={handleTimeChange} 
-                      required
-                      >
-                      <option value="" disabled>Select a time</option>
-                        {timeBlock.map((e) => (
-                        <option key={e} value={e}>{e}</option>
-                          ))}
-                        </select>
-                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                  <select
+                    className="border-2 border-gray-400 text-black p-2 rounded-md w-80 bg-blue-200"
+                    name="time"
+                    value={timeCheck}
+                    onChange={handleTimeChange}
+                    required
+                  >
+                    <option value="" disabled>
+                      Select a time
+                    </option>
+                    {timeBlock.map((e) => (
+                      <option key={e} value={e}>
+                        {e}
+                      </option>
+                    ))}
+                  </select>
+                  {error && <p style={{ color: "red" }}>{error}</p>}
 
                   <h3>ENTER LINK</h3>
                   <input
                     type="text"
                     name="link"
                     id="link"
-                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-slate-300"
+                    className="border-2 border-gray-400 p-2 rounded-md w-80 bg-blue-200"
                     placeholder="Eg.- https://www.google.com"
                     value={link}
                     onChange={(e) => setLink(e.target.value)}
@@ -260,11 +293,11 @@ const filteredRecords = records.filter((record) => {
                                 className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-yellow-200 cursor-pointer"
                                 onClick={(e) => handelDelete(d._id)}
                               >
-                                Del
+                                <MdDeleteForever />
                               </td>
                             ) : (
                               <td className="border-2 border-gray-400 p-2 rounded-md w-80 sm:w-auto bg-slate-800 cursor-pointer">
-                                Del
+                                <MdDeleteForever />
                               </td>
                             )}
                           </tr>

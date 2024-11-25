@@ -131,7 +131,7 @@ const Navbar = () => {
 
   const update = () => {
     localStorage.removeItem("logs");
-    
+
     localStorage.removeItem("studentid");
     setLog(true);
   };
@@ -143,16 +143,14 @@ const Navbar = () => {
   return (
     <div>
       {/* Top Navbar */}
-      <nav className="bg-white border-gray-200 dark:bg-[#1E3A8A]">
+      <nav className=" border-gray-200 bg-[#1E3A8A]">
         <div className="flex justify-between items-center mx-auto max-w-screen-xl pt-2">
           <a
             onClick={() => navigate("/")}
             className="flex items-center cursor-pointer space-x-3"
           >
             <img src={logo} alt="logo" className="h-14 w-14" />
-            <span className="text-2xl font-semibold text-[#1F2937] dark:text-white">
-              E-College
-            </span>
+            <span className="text-2xl font-semibold text-white">E-College</span>
           </a>
 
           <div className="flex items-center space-x-6">
@@ -176,7 +174,7 @@ const Navbar = () => {
 
       {/* Bottom Navbar */}
       <nav
-        className={`bg-[#FFFFFF] dark:bg-[#1E3A8A] ${
+        className={`bg-[#1E3A8A] ${
           isMobileMenuOpen ? "block" : "hidden"
         } md:block`}
       >
@@ -184,20 +182,20 @@ const Navbar = () => {
           <div className="flex items-center justify-between">
             <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-sm">
               <li
-                className="cursor-pointer hover:underline text-[#1F2937] dark:text-white"
+                className="cursor-pointer hover:underline  text-white"
                 onClick={() => navigate("/")}
               >
                 Home
               </li>
 
               <li
-                className="cursor-pointer hover:underline text-[#1F2937] dark:text-white"
+                className="cursor-pointer hover:underline text-white"
                 onClick={() => navigate("/teacher")}
               >
                 Teacher
               </li>
               <li
-                className="cursor-pointer hover:underline text-[#1F2937] dark:text-white"
+                className="cursor-pointer hover:underline text-white"
                 onClick={() => navigate("/admin")}
               >
                 Admin
